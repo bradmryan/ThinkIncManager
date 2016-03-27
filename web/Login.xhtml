@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Think Inc Manager</title>
     </h:head>
@@ -12,22 +13,22 @@
             <b:container>
                 <b:row style="margin-top: 1%">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                       <h:outputText value="Username:" /> 
+                        <h:outputText value="Username:" /> 
                     </b:column>
                     <b:column tiny-screen="5" medium-screen="5" large-screen="5">
                         <h:inputText value="Enter Username" />                   
                     </b:column>
-                    </b:row>
+                </b:row>
                 <b:row style="margin-top: 1%">
-                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                       <h:outputText value="Password:" /> 
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Password:" /> 
                     </b:column>
                     <b:column tiny-screen="5" medium-screen="5" large-screen="5" >
                         <h:inputSecret />                   
                     </b:column>
-<!--                    <b:column tiny-screen="2" medium-screen="2" large-screen="2">
-                        <a href="User">User</a>
-                    </b:column>-->
+                    <!--                    <b:column tiny-screen="2" medium-screen="2" large-screen="2">
+                                            <a href="User">User</a>
+                                        </b:column>-->
                 </b:row>
                 <b:row style="margin-top: 1%">
                     <b:column  tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
@@ -40,5 +41,12 @@
             </b:container>
         </h:form>
     </h:body>
+    <b:container>
+        <b:row>
+            <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 0 !important">
+                <h:outputLabel value="Think Inc 2016" style="text-align: center"  />
+            </b:column>
+        </b:row>
+    </b:container>
 </html>
 
