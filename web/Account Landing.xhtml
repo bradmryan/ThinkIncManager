@@ -28,9 +28,9 @@ and open the template in the editor.
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">
                     <li style="font-weight: bold;border: 1px solid black">Projects I belong to:</li>
-                    <li style="border: 1px solid black">Alan Parsons Project</li>
-                    <li style="border: 1px solid black">Blair Witch Project</li>
-                    <li style="border: 1px solid black">The Manhattan Project</li>
+                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">Alan Parsons Project</a></li>
+                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">Blair Witch Project</a></li>
+                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">The Manhattan Project</a></li>
                    </ul>
                   </b:column>
                 </b:row>  
@@ -43,7 +43,12 @@ and open the template in the editor.
                         <li style="border: 1px solid black">Woodstock '69</li>
                       </ul>
                     </b:column>    
-                </b:row>   
+                </b:row>
+                <b:row>
+                    <b:column tiny-screen="12" medium-screen="12" large-screen="12">
+                        <b:button look="button" value="Log Out" outcome="Login" class="center-block" style="margin-top:5% !important"/>
+                    </b:column>
+                </b:row>
             </b:container>
     </h:body>
 </html>
