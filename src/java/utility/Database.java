@@ -25,11 +25,11 @@ public class Database {
             return null;
         }
         
-        String hostname = "";
-        String port = "";
-        String dbname= "";
-        String username = "";
-        String password = "";
+        String hostname = "localhost";
+        String port = "3306";
+        String dbname= "thinkinc";
+        String username = "thinkinc";
+        String password = "XAbutdATp5sQ4VcS";
         String jdbc = String.format("jdbc:mysql://%s:%s/%s", hostname, port, dbname);
         
         return DriverManager.getConnection(jdbc, username, password);
