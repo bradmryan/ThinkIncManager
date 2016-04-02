@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utility.Database;
+import utility.Utils;
 /**
  *
  * @author Brad Ryan <brad.m.ryan@gmail.com>
@@ -50,17 +50,15 @@ public class Users {
     }
     
     private void getUsersFromDB(){
-        try (Connection conn = Database.getConnection()) {
+        try (Connection conn = Utils.getConnection()) {
             users = new ArrayList<>();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");
             while (rs.next()) {
                 User u = new User(
-                        
                         rs.getString("email"),
                         rs.getString("firstname"),
                         rs.getString("lastname"),
-                        rs.getTimestamp("birthdate"),
                         rs.getString("phoneNumber")
                 );
                 users.add(u);

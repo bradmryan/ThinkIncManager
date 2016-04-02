@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utility.Database;
+import utility.Utils;
 
 /**
  *
@@ -52,7 +52,7 @@ public class Projects {
     }
     
     private void getProjectsFromDB(){
-        try (Connection conn = Database.getConnection()) {
+        try (Connection conn = Utils.getConnection()) {
             projects = new ArrayList<>();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");

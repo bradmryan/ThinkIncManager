@@ -15,14 +15,13 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
-    private Date birthdate;
     private String phoneNumber;
+    private String passHash;
 
-    public User(String email, String firstName, String lastName, Date birthdate, String phoneNumber) {
+    public User(String email, String firstName, String lastName, String phoneNumber) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthdate = birthdate;
         this.phoneNumber = phoneNumber;
     }
 
@@ -52,14 +51,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -68,5 +59,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
     
-    
+    public String getPasshash() {
+        return passHash;
+    }
+
+    public void setPasshash(String passHash) {
+        this.passHash = passHash;
+    }
 }
