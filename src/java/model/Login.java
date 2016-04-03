@@ -5,12 +5,20 @@
  */
 package model;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import utility.Utils;
 
 /**
  *
  * @author brad
  */
+@ManagedBean
+@SessionScoped
 public class Login {
     private String user;
     private String pass;
@@ -51,5 +59,17 @@ public class Login {
         }
         isLoggedIn = false;
         return "Logged Out";
+    }
+    
+    public void doSignup(String pass1, String pass2, String email, String phonenum) {
+        if (pass.equals(pass2)) {
+            String passhash = Utils.hash(pass);
+            try {
+                Connection conn = Utils.getConnection();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
