@@ -23,7 +23,7 @@ import utility.Utils;
 public class Login {
     
 /**
-    CREATE TABLE IF NOT EXISTS `user` (
+    CREATE TABLE IF NOT EXISTS `users` (
         `id` int(11) NOT NULL,
         `email` varchar(50) NOT NULL,
         `firstName` varchar(50) NOT NULL,
@@ -131,7 +131,7 @@ public class Login {
             String passhash = Utils.hash(pass);
             try {
                 Connection conn = Utils.getConnection();
-                String sql = "INSERT INTO user (email, firstName, lastName, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
+                String sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, user);
                 ps.setString(2, firstName);

@@ -9,12 +9,12 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>TODO supply a </title>
+        <title>#{login.currentUser.lastNameFirstName()} </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
             <b:container>
-                <h1 style="text-align:center">Account Landing</h1>
+                <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
                 <b:row style="margin-top: 5%">  
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">

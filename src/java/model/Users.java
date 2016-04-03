@@ -36,7 +36,7 @@ public class Users {
         try (Connection conn = Utils.getConnection()) {
             users = new ArrayList<>();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
             while (rs.next()) {
                 User u = new User(
                         rs.getString("email"),

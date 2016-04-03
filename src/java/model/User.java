@@ -24,8 +24,6 @@ public class User {
         this.passHash = passHash;
     }
 
-    
-    
     public String getEmail() {
         return email;
     }
@@ -64,5 +62,13 @@ public class User {
 
     public void setPasshash(String passHash) {
         this.passHash = passHash;
+    }
+    
+    public String firstNameLastName(){
+        return firstName + " " + lastName;
+    }
+    
+    public String lastNameFirstName(){
+        return lastName + ", " + firstName;
     }
 }
