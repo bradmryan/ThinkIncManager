@@ -6,6 +6,8 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,34 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import utility.Utils;
 
 /**
  *
  * @author Brad Ryan <brad.m.ryan@gmail.com>
  */
+@ManagedBean
+@SessionScoped
 public class Tickets {
-    private List<Ticket> userTickets;
-    private List<Ticket> projectTickets;
+    private List<Ticket> tickets;
     private Ticket currentTicket;
 
     public Tickets() {
-    }
-    
-    public List<Ticket> getUserTickets() {
-        return userTickets;
-    }
-
-    public void setUserTickets(List<Ticket> userTickets) {
-        this.userTickets = userTickets;
-    }
-
-    public List<Ticket> getProjectTickets() {
-        return projectTickets;
-    }
-
-    public void setProjectTickets(List<Ticket> projectTickets) {
-        this.projectTickets = projectTickets;
+        currentTicket = new Ticket();
     }
 
     public Ticket getCurrentTicket() {
@@ -53,18 +43,45 @@ public class Tickets {
     
     private void getUserTicketsFromDB(){
         try (Connection conn = Utils.getConnection()) {
-            userTickets = new ArrayList<>();
+            tickets = new ArrayList<>();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tickets WHERE userid=userid"); //TODO: Join with user_tickets table and select by user id
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tickets");
             while (rs.next()) {
                 Ticket t = new Ticket(
-
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("due_date"),
+                        rs.getDate("close_date"),
+                        rs.getString("priority"),
+                        rs.getInt("level"),
+                        rs.getInt("project_id"),
+                        rs.getBoolean("is_open")
                 );
-                userTickets.add(t);
+                tickets.add(t);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
-            userTickets = new ArrayList<>();
+            tickets = new ArrayList<>();
+        }
+    }
+    
+    private void createTicket(){
+        try (Connection conn = Utils.getConnection()){
+            
+            String sql = "INSERT INTO tickets (description, start_date, due_date, close_date, priority, level, project_id, is_open) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, currentTicket.getDescription());
+            ps.setDate(2, (Date) currentTicket.getStartDate());
+            ps.setDate(3, (Date) currentTicket.getDueDate());
+            ps.setDate(4, (Date) currentTicket.getCloseDate());
+            ps.setString(5, currentTicket.getPriority());
+            ps.setInt(6, currentTicket.getLevel());
+            ps.setInt(7, currentTicket.getProjectId());
+            currentTicket.setOpen(true);
+            ps.setBoolean(8, true);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -13,27 +13,29 @@ import java.util.Date;
  */
 public class Project {
     private String projectName;
-    private String projectManager;
+    private String description;
     private Date startDate;
     private Date endDate;
-    private boolean isActive;
+    private boolean active;
+    
+    public Project(){
+        
+    }
 
-    public Project(String projectName, String projectManager, Date startDate, Date endDate) {
+    public Project(String projectName, String description, Date startDate, Date endDate) {
         this.projectName = projectName;
-        this.projectManager = projectManager;
+        this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.isActive = true;
+        this.active = true;
     }
     
-    public Project(String projectName, String projectManager, Date startDate) {
+    public Project(String projectName, String description, Date startDate) {
         this.projectName = projectName;
-        this.projectManager = projectManager;
+        this.description = description;
         this.startDate = startDate;
-        this.isActive = true;
+        this.active = true;
     }
-
-    
     
     public String getProjectName() {
         return projectName;
@@ -43,12 +45,12 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getProjectManager() {
-        return projectManager;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProjectManager(String projectManager) {
-        this.projectManager = projectManager;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getStartDate() {
@@ -67,12 +69,12 @@ public class Project {
         this.endDate = endDate;
     }
 
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean active) {
+        this.active = active;
     }
     
     
