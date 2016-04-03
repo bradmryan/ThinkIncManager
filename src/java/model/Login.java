@@ -90,6 +90,14 @@ public class Login {
         this.pass = pass;
     }
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public Boolean getIsLoggedIn() {
         return isLoggedIn;
     }

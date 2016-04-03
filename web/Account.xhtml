@@ -18,10 +18,10 @@ and open the template in the editor.
                 <b:row style="margin-top: 5%">  
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">
-                    <li>Username</li>
-                    <li>First Name</li>
-                    <li>Last Name</li>
-                    <li>Email</li>
+                       <li>Username: #{login.currentUser.email}</li>
+                       <li>First Name: #{login.currentUser.firstName}</li>
+                    <li>Last Name: #{login.currentUser.lastName}</li>
+                    <li>Phone Number: #{login.currentUser.phoneNumber}</li>
                     <li><b:button look="button" value="Change Password" class="center-block" style="margin-top:1% !important; float: left !important;"/></li>
                   </ul>
                   </b:column>
