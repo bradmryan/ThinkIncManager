@@ -18,10 +18,10 @@ and open the template in the editor.
             <b:container>
                 <b:row style="margin-top: 2%">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:outputText value="Username:"/>
+                        <h:outputText value="Email:"/>
                     </b:column >
                     <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText/>
+                        <h:inputText value="#{login.user}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
@@ -29,7 +29,7 @@ and open the template in the editor.
                         <h:outputText value="First Name: " />
                     </b:column >
                     <b:column tiny-screen="6" medium-screen="7" large-screen="7" >
-                        <h:inputText/>
+                        <h:inputText value="#{login.firstName}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
@@ -37,16 +37,16 @@ and open the template in the editor.
                         <h:outputText value="Last Name:"/>
                     </b:column >
                     <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText/>
+                        <h:inputText value="#{login.lastName}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
                     <!--bootsfaces column medium offset is not working col-md-offset="3"-->
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:outputText value="Email:"/>
+                        <h:outputText value="Phone Number:"/>
                     </b:column >
                     <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText/>
+                        <h:inputText value="#{login.phoneNumber}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
@@ -54,12 +54,20 @@ and open the template in the editor.
                         <h:outputText value="Password" />
                     </b:column >
                     <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText/>
+                        <h:inputText value="#{login.pass}"/>
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Confirm Password: " />
+                    </b:column >
+                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
+                        <h:inputText value="#{login.pass2}"/>
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
                     <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                        <b:button look="button" class="center-block" outcome="Account Landing" value="Create Account"/>
+                        <h:commandButton  class="center-block" action="#{login.doSignup()}" value="Create Account"/>
                     </b:column>
                 </b:row>
             </b:container>
