@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.Date;
-
 /**
  *
  * @author brad
@@ -18,11 +16,12 @@ public class User {
     private String phoneNumber;
     private String passHash;
 
-    public User(String email, String firstName, String lastName, String phoneNumber) {
+    public User(String email, String firstName, String lastName, String phoneNumber, String passHash) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.passHash = passHash;
     }
 
     

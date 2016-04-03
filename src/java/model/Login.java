@@ -22,7 +22,7 @@ import utility.Utils;
 @SessionScoped
 public class Login {
     
-    /**
+/**
     CREATE TABLE IF NOT EXISTS `user` (
         `id` int(11) NOT NULL,
         `email` varchar(50) NOT NULL,
@@ -40,6 +40,7 @@ public class Login {
     private String pass;
     private String pass2;
     private Boolean isLoggedIn;
+    private User currentUser;
 
     public String getUser() {
         return user;
@@ -102,10 +103,17 @@ public class Login {
         for (User u : new Users().getUsers()) {
             if (user.equals(u.getEmail())
                     && passhash.equals(u.getPasshash())) {
+                currentUser = u;
                 isLoggedIn = true;
                 return "Account";
             }
         }
+        isLoggedIn = false;
+        return "Login";
+    }
+    
+    public String doLogout(){
+        currentUser = null;
         isLoggedIn = false;
         return "Login";
     }
@@ -127,7 +135,7 @@ public class Login {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 return "fail";
             }
-            return "Account";
+            return "Login";
         }
         return "CreateAccount";
     }

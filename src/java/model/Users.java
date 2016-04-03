@@ -19,10 +19,9 @@ import utility.Utils;
  */
 public class Users {
     private List<User> users;
-    private List<User> projectUsers;
-    private List<User> ticketUsers;
 
     public Users() {
+        getUsersFromDB();
     }
     
     public List<User> getUsers() {
@@ -32,34 +31,19 @@ public class Users {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
-    public List<User> getProjectUsers() {
-        return projectUsers;
-    }
-
-    public void setProjectUsers(List<User> projectUsers) {
-        this.projectUsers = projectUsers;
-    }
-
-    public List<User> getTicketUsers() {
-        return ticketUsers;
-    }
-
-    public void setTicketUsers(List<User> ticketUsers) {
-        this.ticketUsers = ticketUsers;
-    }
     
     private void getUsersFromDB(){
         try (Connection conn = Utils.getConnection()) {
             users = new ArrayList<>();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
             while (rs.next()) {
                 User u = new User(
                         rs.getString("email"),
-                        rs.getString("firstname"),
-                        rs.getString("lastname"),
-                        rs.getString("phoneNumber")
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("password")
                 );
                 users.add(u);
             }
