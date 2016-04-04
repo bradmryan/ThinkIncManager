@@ -41,7 +41,7 @@ public class Tickets {
         this.currentTicket = currentTicket;
     }
     
-    private void getUserTicketsFromDB(){
+    private void getTicketsFromDB(){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
             Statement stmt = conn.createStatement();
@@ -62,6 +62,83 @@ public class Tickets {
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             tickets = new ArrayList<>();
+        }
+    }
+    
+    private void getTicketsForProjectFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            tickets = new ArrayList<>();
+            String sql = "SELECT * FROM tickets WHERE project_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Ticket t = new Ticket(
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("due_date"),
+                        rs.getDate("close_date"),
+                        rs.getString("priority"),
+                        rs.getInt("level"),
+                        rs.getInt("project_id"),
+                        rs.getBoolean("is_open")
+                );
+                tickets.add(t);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            tickets = new ArrayList<>();
+        }
+    }
+    
+    private void getTicketsForUserFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            tickets = new ArrayList<>();
+            String sql = "SELECT * FROM user_tickets WHERE user_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Ticket t = new Ticket(
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("due_date"),
+                        rs.getDate("close_date"),
+                        rs.getString("priority"),
+                        rs.getInt("level"),
+                        rs.getInt("project_id"),
+                        rs.getBoolean("is_open")
+                );
+                tickets.add(t);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            tickets = new ArrayList<>();
+        }
+    }
+    
+    private void getTicketFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "SELECT * FROM tickets WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery(sql);
+            
+            while (rs.next()) {
+                Ticket t = new Ticket(
+                        rs.getString("description"),
+                        rs.getDate("start_date"),
+                        rs.getDate("due_date"),
+                        rs.getDate("close_date"),
+                        rs.getString("priority"),
+                        rs.getInt("level"),
+                        rs.getInt("project_id"),
+                        rs.getBoolean("is_open")
+                );
+                currentTicket = t;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

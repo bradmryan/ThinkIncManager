@@ -71,13 +71,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `phoneNumber`, `password`) VALUES
-(1, 'brad.m.ryan@gmail.com', 'brad', 'ryan', '5935555555', '6F33F60886006C8CD40588E039044DB687297346');
-
 -- --------------------------------------------------------
 
 --

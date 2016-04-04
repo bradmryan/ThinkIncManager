@@ -70,6 +70,36 @@ public class Projects {
         }
     }
     
+    private void getProjectFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "SELECT * FROM project WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery(sql);
+            
+            while (rs.next()) {
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void getProjectsForUserFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            String sql = "SELECT * FROM projects WHERE"; //TODO: JOIN with user_projects
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery(sql);
+            
+            while (rs.next()) {
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void createProject(){
         try (Connection conn = Utils.getConnection()){
             

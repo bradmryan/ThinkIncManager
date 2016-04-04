@@ -10,6 +10,7 @@ package model;
  * @author brad
  */
 public class User {
+    private int id;
     private String email;
     private String firstName;
     private String lastName;
@@ -22,6 +23,14 @@ public class User {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.passHash = passHash;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

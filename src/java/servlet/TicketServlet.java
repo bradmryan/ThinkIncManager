@@ -17,35 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author brad
  */
-@WebServlet(name = "TicketServlet", urlPatterns = {"/Ticket"})
+@WebServlet(name = "TicketServlet", urlPatterns = {"/Tickets"})
 public class TicketServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TicketServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TicketServlet at " + request.getContextPath() + "</h1>");
-            out.println("<a href=\"\\ThinkIncManager\">Home</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -59,7 +32,18 @@ public class TicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        //TODO: 
+        // Run getTicketsFromDB method
+        // create json array from tickets.getTickets()
+        // print json array
+        
+        //TODO:
+        // Accept params 
+        // narrow search results using params
+        // create json
+        // print json
+        
     }
 
     /**
@@ -73,7 +57,13 @@ public class TicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        // TODO:
+        // accept json array
+        // parse json array
+        // create ticket instance as tickets.setCurrentTicket() = new Ticket();
+        // do createTicket method
+        
     }
 
     /**
