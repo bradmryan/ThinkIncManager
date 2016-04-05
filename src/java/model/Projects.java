@@ -76,9 +76,15 @@ public class Projects {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery(sql);
-            
             while (rs.next()) {
-                
+                Project p = new Project(
+                        
+                        rs.getString("projectName"),
+                        rs.getString("projectManager"),
+                        rs.getTimestamp("startDate"),
+                        rs.getTimestamp("endDate")
+                );
+                currentProject = p;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,9 +97,16 @@ public class Projects {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery(sql);
+            projects = new ArrayList<>();
             
             while (rs.next()) {
-                
+                Project p = new Project(
+                        rs.getString("projectName"),
+                        rs.getString("projectManager"),
+                        rs.getTimestamp("startDate"),
+                        rs.getTimestamp("endDate")
+                );
+                projects.add(p);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
