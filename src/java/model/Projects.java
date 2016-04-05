@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,12 +89,13 @@ public class Projects {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            currentProject = null;
         }
     }
     
     private void getProjectsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
-            String sql = "SELECT * FROM projects WHERE"; //TODO: JOIN with user_projects
+            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=pu.project_id WHERE up.user_id=?"; //TODO: JOIN with user_projects
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery(sql);
@@ -110,23 +112,36 @@ public class Projects {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            projects = new ArrayList<>();
         }
     }
     
     private void createProject(){
         try (Connection conn = Utils.getConnection()){
             
+            int newID;
+            
             String sql = "INSERT INTO projects (name, description, startDate, endDate, isActive) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, currentProject.getProjectName());
             ps.setString(2, currentProject.getDescription());
-            ps.setDate(3, (Date) currentProject.getStartDate());
-            ps.setDate(4, (Date) currentProject.getEndDate());
+            ps.setDate(3, new java.sql.Date(currentProject.getStartDate().getTime()));
+            ps.setDate(4, null);
             currentProject.setActive(true);
             ps.setBoolean(5, true);
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            newID = rs.getInt("id");
+            
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    
+    //REDIRECTS
+    public String createProject(String redirect){
+        createProject();
+        return redirect;
     }
 }

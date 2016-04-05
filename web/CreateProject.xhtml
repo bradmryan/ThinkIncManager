@@ -7,50 +7,43 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <h:form>
             <b:container>
                 <h1 style="text-align:center">Project Creation</h1>
-                <b:row style="margin-top: 5%">
-                  <b:column tiny-screen="12" medium-screen="12" large-screen="12">  
-                   <ul style="list-style-type: none; border: 2px solid black;">
-                    <h4 style="margin-top: 2%">Project Description:</h4>
-                    <li>Lorem Ipsum</li>
-                    <li>Flipper Dipsum</li>
-                    <li>General Tso</li>
-                    <li>WhatDaYaKnow!</li>
-                   </ul>
-                  </b:column>
-                </b:row>  
-                 <b:row style="margin-top: 5%">
-                  <b:column tiny-screen="12" medium-screen="12" large-screen="12">  
-                   <ul style="list-style-type: none; border: 2px solid black;">
-                    <h4 style="margin-top: 2%">Project End Date:</h4>
-                    <li>3020 C.E</li>
-                    <li>1 billion 8 million 2 thousand seconds from now</li>
-                    <li>SYSDATE + 730 </li>
-                    <li>Never!!!!!!</li>
-                   </ul>
-                  </b:column>
-                </b:row> 
-                <b:row>
-                    <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                      <ul style="list-style-type: none; width: 100% !important; margin-top: 5%">
-                        <li style="font-weight: bold;border: 1px solid black">Project Members:</li>
-                        <li style="border: 1px solid black">Who's on First -</li>
-                        <li style="border: 1px solid black">What's on Second -</li>
-                        <li style="border: 1px solid black">I don't know's on Third -</li>
-                        <li style="font-weight: bold;border: 1px solid black">Add Project Members +</li>
-                      </ul>
-                    </b:column>    
+                <b:row style="margin-top: 2%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Project Name:"/>
+                    </b:column >
+                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
+                        <h:inputText value="#{projects.currentProject.projectName}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Description: " />
+                    </b:column >
+                    <b:column tiny-screen="6" medium-screen="7" large-screen="7" >
+                        <h:inputText value="#{projects.currentProject.description}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Start Date:"/>
+                    </b:column >
+                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
+                        <b:datepicker value="#{projects.currentProject.startDate}" />
+                    </b:column>
                 </b:row>
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
                         <b:button look="button" class="center-block" outcome="Account Landing" value="Account Landing" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <b:button look="button" value="Create Project" outcome="Project Landing" class="center-block" />
+                        <h:commandButton  value="Create Project" action="#{projects.createProject('Account')}" class="center-block" />
                     </b:column>
                 </b:row>
             </b:container>
+        </h:form>
     </h:body>
 </html>
 

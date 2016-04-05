@@ -94,7 +94,7 @@ public class Tickets {
     private void getTicketsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
-            String sql = "SELECT * FROM user_tickets WHERE user_id=?";
+            String sql = "SELECT * FROM user_tickets ut JOIN tickets t ON ut.ticket_id=t.id WHERE ut.user_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
