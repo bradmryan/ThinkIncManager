@@ -39,6 +39,7 @@ public class Users {
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");
             while (rs.next()) {
                 User u = new User(
+                        rs.getInt("id"),
                         rs.getString("email"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),

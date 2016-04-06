@@ -5,18 +5,18 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import utility.Utils;
 
@@ -26,10 +26,13 @@ import utility.Utils;
  */
 @ManagedBean
 @SessionScoped
-public class Projects {
+public class Projects implements Serializable {
     private List<Project> projects;
     private Project currentProject;
-
+    
+    @ManagedProperty("#{login}")
+    private Login login;
+    
     public Projects() {
         currentProject = new Project();
     }
@@ -48,6 +51,10 @@ public class Projects {
 
     public void setCurrentProject(Project currentProject) {
         this.currentProject = currentProject;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
     
     private void getProjectsFromDB(){
@@ -116,13 +123,14 @@ public class Projects {
         }
     }
     
+    
     private void createProject(){
         try (Connection conn = Utils.getConnection()){
-            
             int newID;
             
+            //UPDATE PROJECTS TABLE
             String sql = "INSERT INTO projects (name, description, startDate, endDate, isActive) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, currentProject.getProjectName());
             ps.setString(2, currentProject.getDescription());
             ps.setDate(3, new java.sql.Date(currentProject.getStartDate().getTime()));
@@ -130,8 +138,18 @@ public class Projects {
             currentProject.setActive(true);
             ps.setBoolean(5, true);
             ps.executeUpdate();
+            
+            //UPDATE USER_PROJECTS TABLE
             ResultSet rs = ps.getGeneratedKeys();
-            newID = rs.getInt("id");
+            rs.next();
+            newID = rs.getInt(1);
+            int user = login.getCurrentUser().getId();
+            sql = "INSERT INTO user_projects (user_id, project_id, is_manager) VALUES (?, ?, ?)";
+            PreparedStatement ps2 = conn.prepareStatement(sql);
+            ps2.setInt(1, user);
+            ps2.setInt(2, newID);
+            ps2.setBoolean(3, true);
+            ps2.executeUpdate();
             
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);

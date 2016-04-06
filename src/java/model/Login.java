@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,9 +19,9 @@ import utility.Utils;
  *
  * @author brad
  */
-@ManagedBean
+@ManagedBean(name="login")
 @SessionScoped
-public class Login {
+public class Login implements Serializable {
     
 /**
     CREATE TABLE IF NOT EXISTS `users` (
@@ -90,7 +91,7 @@ public class Login {
         this.pass = pass;
     }
 
-    public User getCurrentUser() {
+    public  User getCurrentUser() {
         return currentUser;
     }
 

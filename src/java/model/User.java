@@ -17,7 +17,8 @@ public class User {
     private String phoneNumber;
     private String passHash;
 
-    public User(String email, String firstName, String lastName, String phoneNumber, String passHash) {
+    public User(int id, String email, String firstName, String lastName, String phoneNumber, String passHash) {
+        this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
