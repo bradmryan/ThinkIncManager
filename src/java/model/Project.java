@@ -12,6 +12,7 @@ import java.util.Date;
  * @author brad
  */
 public class Project {
+    private int id;
     private String projectName;
     private String description;
     private Date startDate;
@@ -35,6 +36,14 @@ public class Project {
         this.description = description;
         this.startDate = startDate;
         this.active = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getProjectName() {
