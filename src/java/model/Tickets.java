@@ -33,6 +33,14 @@ public class Tickets {
         currentTicket = new Ticket();
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
     public Ticket getCurrentTicket() {
         return currentTicket;
     }
@@ -41,7 +49,7 @@ public class Tickets {
         this.currentTicket = currentTicket;
     }
     
-    private void getTicketsFromDB(){
+    public void getTicketsFromDB(){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
             Statement stmt = conn.createStatement();
