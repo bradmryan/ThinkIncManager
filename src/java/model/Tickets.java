@@ -26,7 +26,7 @@ import utility.Utils;
 @ManagedBean
 @SessionScoped
 public class Tickets {
-    private List<Ticket> tickets;
+    private static List<Ticket> tickets;
     private Ticket currentTicket;
 
     public Tickets() {
@@ -38,7 +38,7 @@ public class Tickets {
     }
 
     public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+        Tickets.tickets = tickets;
     }
 
     public Ticket getCurrentTicket() {
@@ -73,10 +73,10 @@ public class Tickets {
         }
     }
     
-    private void getTicketsForProjectFromDB(int id){
+    public static List<Ticket> getTicketsForProjectFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
-            String sql = "SELECT * FROM tickets WHERE project_id=?";
+            String sql = "SELECT * FROM tickets t WHERE project_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -97,9 +97,10 @@ public class Tickets {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             tickets = new ArrayList<>();
         }
+        return tickets;
     }
     
-    private void getTicketsForUserFromDB(int id){
+    public static List<Ticket> getTicketsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
             String sql = "SELECT * FROM user_tickets ut JOIN tickets t ON ut.ticket_id=t.id WHERE ut.user_id=?";
@@ -123,6 +124,7 @@ public class Tickets {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             tickets = new ArrayList<>();
         }
+        return tickets;
     }
     
     private void getTicketFromDB(int id){
@@ -169,4 +171,7 @@ public class Tickets {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    //REDIRECTS
+    
 }

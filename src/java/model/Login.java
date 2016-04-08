@@ -113,6 +113,8 @@ public class Login implements Serializable {
             if (user.equals(u.getEmail())
                     && passhash.equals(u.getPasshash())) {
                 currentUser = u;
+                currentUser.setProjects(Projects.getProjectsForUserFromDB(currentUser.getId()));
+                currentUser.setTickets(Tickets.getTicketsForUserFromDB(currentUser.getId()));
                 isLoggedIn = true;
                 return "Account";
             }

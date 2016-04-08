@@ -27,7 +27,7 @@ import utility.Utils;
 @ManagedBean
 @SessionScoped
 public class Projects implements Serializable {
-    private List<Project> projects;
+    private static List<Project> projects;
     private Project currentProject;
     
     @ManagedProperty("#{login}")
@@ -42,7 +42,7 @@ public class Projects implements Serializable {
     }
 
     public void setProjects(List<Project> projects) {
-        this.projects = projects;
+        Projects.projects = projects;
     }
 
     public Project getCurrentProject() {
@@ -80,17 +80,19 @@ public class Projects implements Serializable {
     
     private void getProjectFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
-            String sql = "SELECT * FROM project WHERE id=?";
+            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=up.project_id WHERE p.id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Project p = new Project(
-                        
-                        rs.getString("projectName"),
-                        rs.getString("projectManager"),
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
                         rs.getTimestamp("startDate"),
-                        rs.getTimestamp("endDate")
+                        rs.getTimestamp("endDate"),
+                        rs.getBoolean("isActive"),
+                        rs.getBoolean("is_manager")
                 );
                 currentProject = p;
             }
@@ -100,20 +102,23 @@ public class Projects implements Serializable {
         }
     }
     
-    private void getProjectsForUserFromDB(int id){
+    public static List<Project> getProjectsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
-            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=pu.project_id WHERE up.user_id=?"; //TODO: JOIN with user_projects
+            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=up.project_id WHERE up.user_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             projects = new ArrayList<>();
             
             while (rs.next()) {
                 Project p = new Project(
-                        rs.getString("projectName"),
-                        rs.getString("projectManager"),
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
                         rs.getTimestamp("startDate"),
-                        rs.getTimestamp("endDate")
+                        rs.getTimestamp("endDate"),
+                        rs.getBoolean("isActive"),
+                        rs.getBoolean("is_manager")
                 );
                 projects.add(p);
             }
@@ -121,6 +126,7 @@ public class Projects implements Serializable {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             projects = new ArrayList<>();
         }
+        return projects;
     }
     
     
@@ -161,5 +167,12 @@ public class Projects implements Serializable {
     public String createProject(String redirect){
         createProject();
         return redirect;
+    }
+    
+    public String goToProject(int id) {
+        getProjectFromDB(id);
+        currentProject.setUsers(Users.getUsersForProjectFromDB(id));
+        currentProject.setTickets(Tickets.getTicketsForProjectFromDB(id));
+        return "Project";
     }
 }

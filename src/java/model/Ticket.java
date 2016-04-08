@@ -6,12 +6,14 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author brad
  */
 public class Ticket {
+    private int id;
     private String description;
     private Date startDate;
     private Date dueDate;
@@ -19,6 +21,7 @@ public class Ticket {
     private String priority;
     private int level;
     private int projectId;
+    private List<User> users;
     private Boolean open;
 
     public Ticket() {
@@ -33,6 +36,14 @@ public class Ticket {
         this.level = level;
         this.projectId = projectId;
         this.open = open;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     public String getDescription() {
@@ -97,6 +108,14 @@ public class Ticket {
 
     public void setOpen(Boolean open) {
         this.open = open;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
     
     
