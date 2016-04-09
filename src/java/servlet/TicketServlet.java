@@ -7,8 +7,13 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,10 +46,17 @@ public class TicketServlet extends HttpServlet {
         //TODO: 
         // Run getTicketsFromDB method
         tickets.getTicketsFromDB();
-                       
+              
         // create json array from tickets.getTickets()
-         JsonArrayBuilder json = Json.createArrayBuilder();
-      
+       // Map<String, Object> config = new HashMap<String, Object>();
+         //JsonArrayBuilder json = Json.createArrayBuilder();
+         //JsonBuilderFactory js = Json.createBuilderFactory(config);
+         for(int i = 0; i < tickets.getTickets().size(); i++) {
+           //     json.add("description", tickets.getTicket(i).getDescription());
+                  JsonObjectBuilder object = Json.createObjectBuilder()
+                      .add("description",tickets.getTicket(i).getDescription())
+                  .build();
+            }
         
         // print json array
         

@@ -36,6 +36,10 @@ public class Tickets {
     public List<Ticket> getTickets() {
         return tickets;
     }
+    
+    public Ticket getTicket(int i) {
+        return tickets.get(i);
+    }
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
