@@ -26,8 +26,20 @@ public class Ticket {
 
     public Ticket() {
     }
+    
+    public Ticket(int id, String description, Date startDate, Date dueDate, String priority, int level, int projectId, Boolean open) {
+        this.id = id;
+        this.description = description;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.level = level;
+        this.projectId = projectId;
+        this.open = open;
+    }
 
-    public Ticket(String description, Date startDate, Date dueDate, Date closeDate, String priority, int level, int projectId, Boolean open) {
+    public Ticket(int id, String description, Date startDate, Date dueDate, Date closeDate, String priority, int level, int projectId, Boolean open) {
+        this.id = id;
         this.description = description;
         this.startDate = startDate;
         this.dueDate = dueDate;

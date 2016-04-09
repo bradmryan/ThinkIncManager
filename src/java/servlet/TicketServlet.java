@@ -32,34 +32,8 @@ import model.Users;
 @WebServlet(name = "TicketServlet", urlPatterns = {"/Tickets"})
 public class TicketServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    
-    @ManagedProperty("#{projects}")
-    private Projects projects;
-    @ManagedProperty("#{login}")
-    private Login login;
-    @ManagedProperty("#{tickets}")
-    private Tickets tickets;
-    @ManagedProperty("#{users}")
-    private Users users;
-
-    public void setProjects(Projects projects) {
-        this.projects = projects;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public void setTickets(Tickets tickets) {
-        this.tickets = tickets;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-    
-    
-    
+    Tickets tickets = new Tickets();
+    Projects projects = new Projects();
     
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -75,27 +49,38 @@ public class TicketServlet extends HttpServlet {
         
         //TODO: 
         // Run getTicketsFromDB method
-        tickets.getTicketsFromDB();
-              
+        if (true){ //If no param is set
+            tickets.getTicketsFromDB();
+        } else if (false) { //if project_id param is set
+            //int id = whatever parameter
+            tickets.setCurrentTicket(Tickets.getTicketsForProjectFromDB(id));
+        }
+        
         // create json array from tickets.getTickets()
          JsonArrayBuilder jsonArray = Json.createArrayBuilder();
          for(int i = 0; i < tickets.getTickets().size(); i++) {
+             String cd;
+             if (tickets.getTicket(i).getCloseDate() == null){
+                 cd = "null";
+             } else {
+                 cd = tickets.getTicket(i).getCloseDate().toString();
+             }
            //     json.add("description", tickets.getTicket(i).getDescription());
                   JsonObjectBuilder object = Json.createObjectBuilder()
+                      .add("id", tickets.getTicket(i).getId())
                       .add("description",tickets.getTicket(i).getDescription())
                       .add("start_date", tickets.getTicket(i).getStartDate().toString())
                       .add("due_date", tickets.getTicket(i).getDueDate().toString())
-                      .add("close_date", tickets.getTicket(i).getCloseDate().toString())
+                      .add("close_date", cd)
                       .add("priority", tickets.getTicket(i).getPriority())
                       .add("level", tickets.getTicket(i).getLevel())
                       .add("project_id", tickets.getTicket(i).getProjectId())
                       .add("is_open", tickets.getTicket(i).getOpen());
-                  object.build();
                   jsonArray.add(object);
             }
          
         // print json array
-        response.getWriter().print(jsonArray); 
+        response.getWriter().print(jsonArray.build()); 
         
         //TODO:
         // Accept params 

@@ -68,22 +68,35 @@ public class Tickets {
     }
     
     public void getTicketsFromDB(){
+
         try (Connection conn = Utils.getConnection()) {
+            
             tickets = new ArrayList<>();
+
             Statement stmt = conn.createStatement();
+
             ResultSet rs = stmt.executeQuery("SELECT * FROM tickets");
+
             while (rs.next()) {
                 Ticket t = new Ticket(
+                        rs.getInt("id"),
                         rs.getString("description"),
                         rs.getDate("start_date"),
                         rs.getDate("due_date"),
-                        rs.getDate("close_date"),
                         rs.getString("priority"),
                         rs.getInt("level"),
                         rs.getInt("project_id"),
                         rs.getBoolean("is_open")
                 );
                 tickets.add(t);
+                System.out.println(t.getId());
+                System.out.println(t.getDescription());
+                System.out.println(t.getStartDate());
+                System.out.println(t.getDueDate());
+                System.out.println(t.getPriority());
+                System.out.println(t.getLevel());
+                System.out.println(t.getProjectId());
+                System.out.println(t.getOpen());
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,6 +113,7 @@ public class Tickets {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Ticket t = new Ticket(
+                        rs.getInt("id"),
                         rs.getString("description"),
                         rs.getDate("start_date"),
                         rs.getDate("due_date"),
@@ -127,6 +141,7 @@ public class Tickets {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Ticket t = new Ticket(
+                        rs.getInt("id"),
                         rs.getString("description"),
                         rs.getDate("start_date"),
                         rs.getDate("due_date"),
@@ -154,6 +169,7 @@ public class Tickets {
             
             while (rs.next()) {
                 Ticket t = new Ticket(
+                        rs.getInt("id"),
                         rs.getString("description"),
                         rs.getDate("start_date"),
                         rs.getDate("due_date"),
