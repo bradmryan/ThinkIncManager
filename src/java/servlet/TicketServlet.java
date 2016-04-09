@@ -27,7 +27,6 @@ import model.Tickets;
  */
 @WebServlet(name = "TicketServlet", urlPatterns = {"/Tickets"})
 public class TicketServlet extends HttpServlet {
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -48,24 +47,32 @@ public class TicketServlet extends HttpServlet {
         tickets.getTicketsFromDB();
               
         // create json array from tickets.getTickets()
-       // Map<String, Object> config = new HashMap<String, Object>();
-         //JsonArrayBuilder json = Json.createArrayBuilder();
-         //JsonBuilderFactory js = Json.createBuilderFactory(config);
+         JsonArrayBuilder jsonArray = Json.createArrayBuilder();
          for(int i = 0; i < tickets.getTickets().size(); i++) {
            //     json.add("description", tickets.getTicket(i).getDescription());
                   JsonObjectBuilder object = Json.createObjectBuilder()
                       .add("description",tickets.getTicket(i).getDescription())
-                  .build();
+                      .add("start_date", tickets.getTicket(i).getStartDate().toString())
+                      .add("due_date", tickets.getTicket(i).getDueDate().toString())
+                      .add("close_date", tickets.getTicket(i).getCloseDate().toString())
+                      .add("priority", tickets.getTicket(i).getPriority())
+                      .add("level", tickets.getTicket(i).getLevel())
+                      .add("project_id", tickets.getTicket(i).getProjectId())
+                      .add("is_open", tickets.getTicket(i).getOpen());
+                  object.build();
+                  jsonArray.add(object);
             }
-        
+         
         // print json array
+        response.getWriter().print(jsonArray); 
         
         //TODO:
         // Accept params 
         // narrow search results using params
         // create json
         // print json
-//        response.getWriter().print(someString); 
+    
+        
     }
 
     /**
