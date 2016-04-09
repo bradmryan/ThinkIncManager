@@ -7,11 +7,16 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.faces.bean.ManagedProperty;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Login;
+import model.Projects;
+import model.Tickets;
+import model.Users;
 
 /**
  *
@@ -20,6 +25,31 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserServlet", urlPatterns = {"/User"})
 public class UserServlet extends HttpServlet {
 
+    @ManagedProperty("#{projects}")
+    private Projects projects;
+    @ManagedProperty("#{login}")
+    private Login login;
+    @ManagedProperty("#{tickets}")
+    private Tickets tickets;
+    @ManagedProperty("#{users}")
+    private Users users;
+
+    public void setProjects(Projects projects) {
+        this.projects = projects;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
+    public void setTickets(Tickets tickets) {
+        this.tickets = tickets;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

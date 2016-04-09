@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import javax.faces.bean.ManagedProperty;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
@@ -19,7 +20,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Login;
+import model.Projects;
 import model.Tickets;
+import model.Users;
 
 /**
  *
@@ -28,6 +32,35 @@ import model.Tickets;
 @WebServlet(name = "TicketServlet", urlPatterns = {"/Tickets"})
 public class TicketServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
+    @ManagedProperty("#{projects}")
+    private Projects projects;
+    @ManagedProperty("#{login}")
+    private Login login;
+    @ManagedProperty("#{tickets}")
+    private Tickets tickets;
+    @ManagedProperty("#{users}")
+    private Users users;
+
+    public void setProjects(Projects projects) {
+        this.projects = projects;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
+    public void setTickets(Tickets tickets) {
+        this.tickets = tickets;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+    
+    
+    
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -39,6 +72,8 @@ public class TicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
         
         Tickets tickets = new Tickets();
         

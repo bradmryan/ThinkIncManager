@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package model;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import utility.Utils;
 /**
  *
  * @author Brad Ryan <brad.m.ryan@gmail.com>
  */
-public class Users {
+@ManagedBean(name="users")
+@SessionScoped
+public class Users implements Serializable{
     private static List<User> users;
 
     public Users() {
