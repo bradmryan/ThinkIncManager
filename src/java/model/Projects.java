@@ -24,7 +24,7 @@ import utility.Utils;
  *
  * @author Brad Ryan <brad.m.ryan@gmail.com>
  */
-@ManagedBean
+@ManagedBean(name="projects")
 @SessionScoped
 public class Projects implements Serializable {
     private static List<Project> projects;
