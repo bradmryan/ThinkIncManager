@@ -73,10 +73,6 @@ public class TicketServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
-        
-        Tickets tickets = new Tickets();
-        
         //TODO: 
         // Run getTicketsFromDB method
         tickets.getTicketsFromDB();
