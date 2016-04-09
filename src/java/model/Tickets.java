@@ -32,6 +32,8 @@ public class Tickets {
 
     @ManagedProperty("#{projects}")
     private Projects projects;
+    @ManagedProperty("#{login}")
+    private Login login;
     
     public Tickets() {
         currentTicket = new Ticket();
@@ -59,6 +61,10 @@ public class Tickets {
 
     public void setProjects(Projects projects) {
         this.projects = projects;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
     
     public void getTicketsFromDB(){
@@ -168,7 +174,7 @@ public class Tickets {
         try (Connection conn = Utils.getConnection()){
             
             String sql = "INSERT INTO tickets (description, start_date, due_date, close_date, priority, level, project_id, is_open) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, currentTicket.getDescription());
             ps.setDate(2, new java.sql.Date(currentTicket.getStartDate().getTime()));
             ps.setDate(3, new java.sql.Date(currentTicket.getDueDate().getTime()));
@@ -180,6 +186,17 @@ public class Tickets {
             currentTicket.setOpen(true);
             ps.setBoolean(8, currentTicket.getOpen());
             ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            int newID = rs.getInt(1);
+            
+            sql = "INSERT INTO user_tickets (user_id, ticket_id) VALUES (?,?)";
+            PreparedStatement ps2 = conn.prepareStatement(sql);
+            ps2.setInt(1, login.getCurrentUser().getId());
+            ps2.setInt(2, newID);
+            ps2.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }

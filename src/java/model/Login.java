@@ -41,7 +41,7 @@ public class Login implements Serializable {
     private String pass;
     private String pass2;
     private Boolean isLoggedIn;
-    private User currentUser;
+    User currentUser;
 
     public String getUser() {
         return user;
