@@ -5,6 +5,7 @@
  */
 package model;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,7 @@ import utility.Utils;
  * @author Brad Ryan <brad.m.ryan@gmail.com>
  */
 public class Users {
-    private List<User> users;
+    private static List<User> users;
 
     public Users() {
         getUsersFromDB();
@@ -29,7 +30,7 @@ public class Users {
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+        Users.users = users;
     }
     
     private void getUsersFromDB(){
@@ -52,5 +53,30 @@ public class Users {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             users = new ArrayList<>();
         }
+    }
+    
+    public static List<User> getUsersForProjectFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            users = new ArrayList<>();
+            String sql = "SELECT * FROM users u JOIN user_projects up ON u.id=up.user_id WHERE up.project_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("password")
+                );
+                users.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            users = new ArrayList<>();
+        }
+        return users;
     }
 }

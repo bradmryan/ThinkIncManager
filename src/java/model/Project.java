@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -17,11 +18,26 @@ public class Project {
     private String description;
     private Date startDate;
     private Date endDate;
+    private List<Ticket> tickets;
+    private List<User> users;
     private boolean active;
+    private boolean manager;
     
     public Project(){
         
     }
+
+    public Project(int id, String projectName, String description, Date startDate, Date endDate, boolean active, boolean manager) {
+        this.id = id;
+        this.projectName = projectName;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.active = active;
+        this.manager = manager;
+    }
+    
+    
 
     public Project(String projectName, String description, Date startDate, Date endDate) {
         this.projectName = projectName;
@@ -78,12 +94,36 @@ public class Project {
         this.endDate = endDate;
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+    
     public boolean isActive() {
         return active;
     }
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isManager() {
+        return manager;
+    }
+
+    public void setManager(boolean manager) {
+        this.manager = manager;
     }
     
     

@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author brad
@@ -16,6 +18,8 @@ public class User {
     private String lastName;
     private String phoneNumber;
     private String passHash;
+    private List<Project> projects;
+    private List<Ticket> tickets;
 
     public User(int id, String email, String firstName, String lastName, String phoneNumber, String passHash) {
         this.id = id;
@@ -72,6 +76,22 @@ public class User {
 
     public void setPasshash(String passHash) {
         this.passHash = passHash;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
     
     public String firstNameLastName(){

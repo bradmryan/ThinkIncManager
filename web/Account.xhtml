@@ -7,12 +7,14 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>#{login.currentUser.lastNameFirstName()} </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <h:form>
             <b:container>
                 <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
                 <b:row style="margin-top: 5%">  
@@ -29,9 +31,9 @@ and open the template in the editor.
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">
                     <li style="font-weight: bold;border: 1px solid black">Projects I belong to:</li>
-                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">Alan Parsons Project</a></li>
-                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">Blair Witch Project</a></li>
-                    <li style="border: 1px solid black"><a href="Project Landing.xhtml">The Manhattan Project</a></li>
+                    <ui:repeat var="p" value="#{login.currentUser.projects}">
+                        <li style="border: 1px solid black"><h:commandLink action="#{projects.goToProject(p.id)}">#{p.projectName}</h:commandLink></li>
+                    </ui:repeat>
                    </ul>
                   </b:column>
                 </b:row>  
@@ -45,7 +47,6 @@ and open the template in the editor.
                       </ul>
                     </b:column>    
                 </b:row>
-                <h:form>
                     <b:row style="margin-top:5% !important">
                         <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
                             <b:button look="button" class="center-block" outcome="CreateProject" value="Create Project" />
@@ -54,7 +55,7 @@ and open the template in the editor.
                             <h:commandButton value="Log Out" action="#{login.doLogout()}" class="center-block" />
                         </b:column>
                     </b:row>
-                </h:form>
             </b:container>
+        </h:form>
     </h:body>
 </html>
