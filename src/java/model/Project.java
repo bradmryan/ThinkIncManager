@@ -21,20 +21,18 @@ public class Project {
     private List<Ticket> tickets;
     private List<User> users;
     private boolean active;
-    private boolean manager;
     
     public Project(){
         
     }
 
-    public Project(int id, String projectName, String description, Date startDate, Date endDate, boolean active, boolean manager) {
+    public Project(int id, String projectName, String description, Date startDate, Date endDate, boolean active) {
         this.id = id;
         this.projectName = projectName;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.active = active;
-        this.manager = manager;
     }
     
     
@@ -47,10 +45,12 @@ public class Project {
         this.active = true;
     }
     
-    public Project(String projectName, String description, Date startDate) {
+    public Project(int id, String projectName, String description, Date startDate) {
+        this.id = id;
         this.projectName = projectName;
         this.description = description;
         this.startDate = startDate;
+        this.endDate = null;
         this.active = true;
     }
 
@@ -117,14 +117,5 @@ public class Project {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-    public boolean isManager() {
-        return manager;
-    }
-
-    public void setManager(boolean manager) {
-        this.manager = manager;
-    }
-    
     
 }

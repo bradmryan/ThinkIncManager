@@ -34,6 +34,7 @@ public class TicketServlet extends HttpServlet {
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     Tickets tickets = new Tickets();
     Projects projects = new Projects();
+    Users users = new Users();
     
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -8,6 +8,9 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.faces.bean.ManagedProperty;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,60 +25,12 @@ import model.Users;
  *
  * @author brad
  */
-@WebServlet(name = "ProjectServlet", urlPatterns = {"/Project"})
+@WebServlet(name = "ProjectServlet", urlPatterns = {"/Projects"})
 public class ProjectServlet extends HttpServlet {
     
-    @ManagedProperty("#{projects}")
-    private Projects projects;
-    @ManagedProperty("#{login}")
-    private Login login;
-    @ManagedProperty("#{tickets}")
-    private Tickets tickets;
-    @ManagedProperty("#{users}")
-    private Users users;
-
-    public void setProjects(Projects projects) {
-        this.projects = projects;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public void setTickets(Tickets tickets) {
-        this.tickets = tickets;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProjectServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProjectServlet at " + request.getContextPath() + "</h1>");
-            out.println("<a href=\"Ticket\">Ticket</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+    Tickets tickets = new Tickets();
+    Projects projects = new Projects();
+    Users users = new Users();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -89,7 +44,41 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String id = request.getParameter("id");
+        String user_id = request.getParameter("user_id");
+        
+        if (id != null) { // get tickets by ID
+            projects.getProjectFromDB(Integer.parseInt(id));
+            projects.getProjects().add(projects.getCurrentProject());
+        } else if (user_id != null){ // get tickets by user id
+            projects.setProjects(Projects.getProjectsForUserFromDB(Integer.parseInt(user_id)));
+        } else {
+            projects.getProjectsFromDB();
+        }
+        
+
+         JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+         for(int i = 0; i < projects.getProjects().size(); i++) {
+             String ed;
+             if (projects.getProject(i).getEndDate() == null){
+                 ed = "null";
+             } else {
+                 ed = projects.getProject(i).getEndDate().toString();
+             }
+                  JsonObjectBuilder object = Json.createObjectBuilder()
+                      .add("id", projects.getProject(i).getId())
+                      .add("name", projects.getProject(i).getProjectName())
+                      .add("description",projects.getProject(i).getDescription())
+                      .add("start_date", projects.getProject(i).getStartDate().toString())
+                      .add("end_date", ed)
+                      .add("is_active", projects.getProject(i).isActive());
+                  jsonArray.add(object);
+            }
+         
+        // print json array
+        response.getWriter().print(jsonArray.build());
+
     }
 
     /**
@@ -103,7 +92,7 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

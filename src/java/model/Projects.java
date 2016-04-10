@@ -40,6 +40,10 @@ public class Projects implements Serializable {
     public List<Project> getProjects() {
         return projects;
     }
+    
+    public Project getProject(int i) {
+        return projects.get(i);
+    }
 
     public void setProjects(List<Project> projects) {
         Projects.projects = projects;
@@ -57,18 +61,19 @@ public class Projects implements Serializable {
         this.login = login;
     }
     
-    private void getProjectsFromDB(){
+    public void getProjectsFromDB(){
         try (Connection conn = Utils.getConnection()) {
             projects = new ArrayList<>();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM projects");
             while (rs.next()) {
                 Project p = new Project(
-                        
-                        rs.getString("projectName"),
-                        rs.getString("projectManager"),
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
                         rs.getTimestamp("startDate"),
-                        rs.getTimestamp("endDate")
+                        rs.getTimestamp("endDate"),
+                        rs.getBoolean("isActive")
                 );
                 projects.add(p);
             }
@@ -91,8 +96,7 @@ public class Projects implements Serializable {
                         rs.getString("description"),
                         rs.getTimestamp("startDate"),
                         rs.getTimestamp("endDate"),
-                        rs.getBoolean("isActive"),
-                        rs.getBoolean("is_manager")
+                        rs.getBoolean("isActive")
                 );
                 currentProject = p;
             }
@@ -117,8 +121,7 @@ public class Projects implements Serializable {
                         rs.getString("description"),
                         rs.getTimestamp("startDate"),
                         rs.getTimestamp("endDate"),
-                        rs.getBoolean("isActive"),
-                        rs.getBoolean("is_manager")
+                        rs.getBoolean("isActive")
                 );
                 projects.add(p);
             }
