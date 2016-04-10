@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,79 +47,49 @@ public class ProjectsTest {
     public void testGetProjects() {
         System.out.println("getProjects");
         Projects instance = new Projects();
-        List<Project> expResult = null;
-        List<Project> result = instance.getProjects();
+        List<Project> projects = new ArrayList();
+        projects.add(new Project());
+        projects.add(new Project());
+        projects.add(new Project());
+        instance.setProjects(projects);
+        boolean expResult = true;
+        
+        boolean result = false;
+        for (int i =0; i < projects.size(); i++){
+            result = Project.class.isInstance(projects.get(i));
+        }
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of getProject method, of class Projects.
      */
     @Test
-    public void testGetProject() {
+    public void testSetProjectsAndGetProject() {
         System.out.println("getProject");
-        int i = 0;
-        Projects instance = new Projects();
-        Project expResult = null;
-        Project result = instance.getProject(i);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setProjects method, of class Projects.
-     */
-    @Test
-    public void testSetProjects() {
-        System.out.println("setProjects");
-        List<Project> projects = null;
+        int i = 1;
+        List<Project> projects = new ArrayList();
+        projects.add(new Project("one", "one", new Date(01,01,2016), new Date(01,01,2016)));
+        projects.add(new Project("two", "two", new Date(01,01,2016), new Date(01,01,2016)));
+        projects.add(new Project("three", "three", new Date(01,01,2016), new Date(01,01,2016)));
         Projects instance = new Projects();
         instance.setProjects(projects);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "two";
+        String result = instance.getProject(i).getProjectName();
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of getCurrentProject method, of class Projects.
      */
     @Test
-    public void testGetCurrentProject() {
+    public void testSetAndGetCurrentProject() {
         System.out.println("getCurrentProject");
         Projects instance = new Projects();
-        Project expResult = null;
-        Project result = instance.getCurrentProject();
+        instance.setCurrentProject(new Project("one", "one", new Date(01,01,2016), new Date(01,01,2016)));
+        String expResult = "one";
+        String result = instance.getCurrentProject().getProjectName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setCurrentProject method, of class Projects.
-     */
-    @Test
-    public void testSetCurrentProject() {
-        System.out.println("setCurrentProject");
-        Project currentProject = null;
-        Projects instance = new Projects();
-        instance.setCurrentProject(currentProject);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setLogin method, of class Projects.
-     */
-    @Test
-    public void testSetLogin() {
-        System.out.println("setLogin");
-        Login login = null;
-        Projects instance = new Projects();
-        instance.setLogin(login);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -128,8 +100,6 @@ public class ProjectsTest {
         System.out.println("getProjectsFromDB");
         Projects instance = new Projects();
         instance.getProjectsFromDB();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -141,52 +111,6 @@ public class ProjectsTest {
         int id = 0;
         Projects instance = new Projects();
         instance.getProjectFromDB(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getProjectsForUserFromDB method, of class Projects.
-     */
-    @Test
-    public void testGetProjectsForUserFromDB() {
-        System.out.println("getProjectsForUserFromDB");
-        int id = 0;
-        List<Project> expResult = null;
-        List<Project> result = Projects.getProjectsForUserFromDB(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of createProject method, of class Projects.
-     */
-    @Test
-    public void testCreateProject() {
-        System.out.println("createProject");
-        String redirect = "";
-        Projects instance = new Projects();
-        String expResult = "";
-        String result = instance.createProject(redirect);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of goToProject method, of class Projects.
-     */
-    @Test
-    public void testGoToProject() {
-        System.out.println("goToProject");
-        int id = 0;
-        Projects instance = new Projects();
-        String expResult = "";
-        String result = instance.goToProject(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
