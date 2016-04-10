@@ -160,7 +160,7 @@ public class Tickets {
         return tickets;
     }
     
-    private void getTicketFromDB(int id){
+    public void getTicketFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             String sql = "SELECT * FROM tickets WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(sql);

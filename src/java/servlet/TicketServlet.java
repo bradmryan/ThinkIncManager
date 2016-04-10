@@ -46,14 +46,19 @@ public class TicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String user_id = request.getParameter("user_id");
+        String project_id = request.getParameter("project_id");
         
-        //TODO: 
-        // Run getTicketsFromDB method
-        if (true){ //If no param is set
+        if (id != null) { // get tickets by ID
+            tickets.getTicketFromDB(Integer.parseInt(id));
+            tickets.getTickets().add(tickets.getCurrentTicket());
+        } else if (user_id != null){ // get tickets by user id
+            tickets.setTickets(Tickets.getTicketsForUserFromDB(Integer.parseInt(user_id)));
+        } else if (project_id != null) { // get tickets by project id
+            tickets.setTickets(Tickets.getTicketsForProjectFromDB(Integer.parseInt(project_id)));
+        } else {
             tickets.getTicketsFromDB();
-        } else if (false) { //if project_id param is set
-            //int id = whatever parameter
-            tickets.setCurrentTicket(Tickets.getTicketsForProjectFromDB(id));
         }
         
         // create json array from tickets.getTickets()
@@ -81,14 +86,7 @@ public class TicketServlet extends HttpServlet {
          
         // print json array
         response.getWriter().print(jsonArray.build()); 
-        
-        //TODO:
-        // Accept params 
-        // narrow search results using params
-        // create json
-        // print json
-    
-        
+      
     }
 
     /**
