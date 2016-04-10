@@ -8,6 +8,9 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.faces.bean.ManagedProperty;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,62 +25,13 @@ import model.Users;
  *
  * @author brad
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/User"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/Users"})
 public class UserServlet extends HttpServlet {
 
-    @ManagedProperty("#{projects}")
-    private Projects projects;
-    @ManagedProperty("#{login}")
-    private Login login;
-    @ManagedProperty("#{tickets}")
-    private Tickets tickets;
-    @ManagedProperty("#{users}")
-    private Users users;
+    Tickets tickets = new Tickets();
+    Projects projects = new Projects();
+    Users users = new Users();
 
-    public void setProjects(Projects projects) {
-        this.projects = projects;
-    }
-
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-
-    public void setTickets(Tickets tickets) {
-        this.tickets = tickets;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
-    }
-    
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserServlet at " + request.getContextPath() + "</h1>");
-            out.println("<a href=\"Project\">Project</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -89,7 +43,37 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        String ticket_id = request.getParameter("ticket_id");
+        String project_id = request.getParameter("project_id");
+        
+        if (id != null) { // get tickets by ID
+            users.getUsers().add(users.getUserFromDB(Integer.parseInt(id)));
+        } else if (ticket_id != null){ // get tickets by user id
+            users.setUsers(Users.getUsersForTicketFromDB(Integer.parseInt(ticket_id)));
+        } else if (project_id != null) { // get tickets by project id
+            users.setUsers(Users.getUsersForProjectFromDB(Integer.parseInt(project_id)));
+        } else {
+            users.getUsersFromDB();
+        }
+        
+        // create json array from tickets.getTickets()
+         JsonArrayBuilder jsonArray = Json.createArrayBuilder();
+         for(int i = 0; i < users.getUsers().size(); i++) {
+             
+           //     json.add("description", tickets.getTicket(i).getDescription());
+                  JsonObjectBuilder object = Json.createObjectBuilder()
+                      .add("id", users.getUser(i).getId())
+                      .add("email",users.getUser(i).getEmail())
+                      .add("first_name", users.getUser(i).getFirstName())
+                      .add("last_name", users.getUser(i).getLastName())
+                      .add("phonenumber",users.getUser(i).getPhoneNumber());
+                  jsonArray.add(object);
+            }
+         
+        // print json array
+        response.getWriter().print(jsonArray.build());
+        
     }
 
     /**
@@ -103,7 +87,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         
     }
 
     /**
@@ -114,6 +98,6 @@ public class UserServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

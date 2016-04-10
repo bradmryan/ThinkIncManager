@@ -27,18 +27,21 @@ public class Users implements Serializable{
     private static List<User> users;
 
     public Users() {
-        getUsersFromDB();
     }
     
     public List<User> getUsers() {
         return users;
+    }
+    
+    public User getUser(int id){
+        return users.get(id);
     }
 
     public void setUsers(List<User> users) {
         Users.users = users;
     }
     
-    private void getUsersFromDB(){
+    public void getUsersFromDB(){
         try (Connection conn = Utils.getConnection()) {
             users = new ArrayList<>();
             Statement stmt = conn.createStatement();
@@ -58,6 +61,32 @@ public class Users implements Serializable{
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             users = new ArrayList<>();
         }
+    }
+    
+    public User getUserFromDB(int id){
+        User user = new User();
+        try (Connection conn = Utils.getConnection()) {
+            
+            String sql = "SELECT * FROM users WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("password")
+                );
+                user = u;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            user = null;
+        }
+        return user;
     }
     
     public static List<User> getUsersForProjectFromDB(int id){

@@ -21,6 +21,11 @@ public class User {
     private List<Project> projects;
     private List<Ticket> tickets;
 
+    public User() {
+    }
+
+    
+    
     public User(int id, String email, String firstName, String lastName, String phoneNumber, String passHash) {
         this.id = id;
         this.email = email;
