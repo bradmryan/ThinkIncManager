@@ -35,16 +35,16 @@
                 <b:row>
                     <li style="font-weight: bold;border: 1px solid black">Tickets for this Project: </li>
                     <ui:repeat var="t" value="#{projects.currentProject.tickets}">
-                        <li style="border: 1px solid black"><h:commandLink action="#{t.id}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
+                        <li style="border: 1px solid black"><h:commandLink action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
                     </ui:repeat>
                 </b:row>
                 
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <b:button look="button" class="center-block" outcome="CreateTicket" value="Create New Ticket" />
+                        <h:commandButton value="Create New Ticket" action="CreateTicket" class="center-block" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <h:commandButton value="Log Out" action="#{login.doLogout()}" class="center-block" />
+                        <h:commandButton value="Log Out" action="#{login.doLogout()}"  />
                     </b:column>
                 </b:row>
             </b:container>

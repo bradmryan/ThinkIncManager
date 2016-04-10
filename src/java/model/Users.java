@@ -84,4 +84,29 @@ public class Users implements Serializable{
         }
         return users;
     }
+    
+    public static List<User> getUsersForTicketFromDB(int id){
+        try (Connection conn = Utils.getConnection()) {
+            users = new ArrayList<>();
+            String sql = "SELECT * FROM users u JOIN user_tickets ut ON u.id=ut.user_id WHERE ut.ticket_id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User u = new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("phoneNumber"),
+                        rs.getString("password")
+                );
+                users.add(u);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
+            users = new ArrayList<>();
+        }
+        return users;
+    }
 }

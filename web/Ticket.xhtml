@@ -13,22 +13,21 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h1 style="text-align:center">Ticket Landing</h1>
+        <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
         <b:container>
             <b:row style="margin-top: 5%">                
                 <b:column tiny-screen="12" medium-screen="12" large-screen="12">
                     <ul style="list-style-type: none; border: 2px solid black;">
                         <h4 style="margin-top: 2%">Ticket Description:</h4>
-                        <li><h:outputText value="Inserted ticket description, details on what needs to be done." /></li>
-                        <li>Assigned Ticket to: <h:outputText value="Username" /></li>
-                        <li style="margin-bottom: 2%">Project Name: <h:outputText value="Project Name" /></li>
+                        <li>#{tickets.currentTicket.description}</li>
+                        <li style="margin-bottom: 2%">Project Name: #{projects.currentProject.projectName}</li>
                     </ul>
                 </b:column>
             </b:row>
             <b:row>
                 <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                    <b:button look="button" value="Back to Account Landing" outcome="Account Landing.xhtml" class="center-block" style="margin-top:2% !important;" />
-                     <b:button look="button" value="Back to Project Landing" outcome="Project Landing.xhtml" class="center-block" style="margin-top:2% !important;"/>
+                    <h:commandButton  value="Back to Account" action="Account" class="center-block"  />
+                     <h:commandButton  value="Back to Project" action="Project" class="center-block" />
                 </b:column>
             </b:row>
         </b:container>

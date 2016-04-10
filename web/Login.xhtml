@@ -33,10 +33,10 @@
                 </b:row>
                 <b:row style="margin-top: 1%">
                     <b:column  tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" style="margin-top:1% !important"/>
+                        <h:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" />
                     </b:column>
                     <b:column  tiny-screen="2" medium-screen="2" large-screen="2" offset="3" style="padding-right: 0 !important; margin-left: 0 !important">
-                        <b:button look="button" value="Sign Up" outcome="CreateAccount" class="center-block" style="margin-top:1% !important"/>
+                        <h:commandButton  value="Sign Up" action="CreateAccount" class="center-block" />
                     </b:column>
                 </b:row>
             </b:container>

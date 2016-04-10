@@ -23,17 +23,6 @@ import utility.Utils;
 @SessionScoped
 public class Login implements Serializable {
     
-/**
-    CREATE TABLE IF NOT EXISTS `users` (
-        `id` int(11) NOT NULL,
-        `email` varchar(50) NOT NULL,
-        `firstName` varchar(50) NOT NULL,
-        `lastName` varchar(50) NOT NULL,
-        `phoneNumber` varchar(10) NOT NULL,
-        `password` varchar(250) NOT NULL
-    ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1; 
-*/
-    
     private String user;
     private String firstName;
     private String lastName;
@@ -146,7 +135,7 @@ public class Login implements Serializable {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 return "fail";
             }
-            return "Login";
+            return "Account";
         }
         return "CreateAccount";
     }

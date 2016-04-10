@@ -78,7 +78,7 @@ public class Projects implements Serializable {
         }
     }
     
-    private void getProjectFromDB(int id){
+    public void getProjectFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=up.project_id WHERE p.id=?";
             PreparedStatement ps = conn.prepareStatement(sql);

@@ -165,7 +165,7 @@ public class Tickets {
             String sql = "SELECT * FROM tickets WHERE id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 Ticket t = new Ticket(
@@ -222,5 +222,13 @@ public class Tickets {
     public String createTicket(String redirect){
         createTicket();
         return redirect;
+    }
+    
+    public String goToTicket(int id){
+        getTicketFromDB(id);
+        System.out.println(currentTicket.getId());
+        currentTicket.setUsers(Users.getUsersForTicketFromDB(id));
+        projects.goToProject(currentTicket.getProjectId());
+        return "Ticket";
     }
 }
