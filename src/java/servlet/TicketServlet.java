@@ -7,8 +7,15 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedProperty;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -22,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Login;
 import model.Projects;
+import model.Ticket;
 import model.Tickets;
 import model.Users;
 
@@ -101,13 +109,34 @@ public class TicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+   
         // TODO:
         // accept json array
         // parse json array
         // create ticket instance as tickets.setCurrentTicket() = new Ticket();
         // do createTicket method
+        String description = request.getParameter("description");
+        String start_date = request.getParameter("start_date");
+        String due_date = request.getParameter("due_date");
+        String priority = request.getParameter("priority");
+        String level = request.getParameter("level");
         
+        DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
+        int lv = Integer.parseInt(level);
+        
+        Ticket pt = new Ticket();
+        pt.setDescription(description);
+        pt.setPriority(priority);
+        pt.setLevel(lv);
+        try {
+            pt.setStartDate(format.parse(start_date));
+            pt.setDueDate(format.parse(due_date));
+        } catch (ParseException ex) {
+            Logger.getLogger(TicketServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tickets.setCurrentTicket(pt);
+        tickets.createTicket("");
     }
 
     /**
