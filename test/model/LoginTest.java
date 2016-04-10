@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import utility.Utils;
 
 /**
  *
@@ -136,53 +137,9 @@ public class LoginTest {
     public void testGetIsLoggedIn() {
         System.out.println("getIsLoggedIn");
         Login instance = new Login();
-        Boolean expResult = null;
+        instance.setIsLoggedIn(false);
+        Boolean expResult = false;
         Boolean result = instance.getIsLoggedIn();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of doLogin method, of class Login.
-     */
-    @Test
-    public void testDoLogin() {
-        System.out.println("doLogin");
-        Login instance = new Login();
-        String expResult = "";
-        String result = instance.doLogin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of doLogout method, of class Login.
-     */
-    @Test
-    public void testDoLogout() {
-        System.out.println("doLogout");
-        Login instance = new Login();
-        String expResult = "";
-        String result = instance.doLogout();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of doSignup method, of class Login.
-     */
-    @Test
-    public void testDoSignup() {
-        System.out.println("doSignup");
-        Login instance = new Login();
-        String expResult = "";
-        String result = instance.doSignup();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
