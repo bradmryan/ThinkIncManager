@@ -27,6 +27,11 @@ public class Ticket {
     public Ticket() {
     }
     
+    public Ticket(int id, String description) {
+        this.id = id;
+        this.description = description;
+    }
+    
     public Ticket(int id, String description, Date startDate, Date dueDate, String priority, int level, int projectId, Boolean open) {
         this.id = id;
         this.description = description;
