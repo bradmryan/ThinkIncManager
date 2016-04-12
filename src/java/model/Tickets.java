@@ -6,7 +6,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +74,7 @@ public class Tickets {
 
             Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT * FROM tickets");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM tickets WHERE is_open=true");
 
             while (rs.next()) {
                 Ticket t = new Ticket(
@@ -107,7 +106,7 @@ public class Tickets {
     public static List<Ticket> getTicketsForProjectFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
-            String sql = "SELECT * FROM tickets t WHERE project_id=?";
+            String sql = "SELECT * FROM tickets t WHERE project_id=? AND is_open=true";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -135,7 +134,7 @@ public class Tickets {
     public static List<Ticket> getTicketsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
             tickets = new ArrayList<>();
-            String sql = "SELECT * FROM user_tickets ut JOIN tickets t ON ut.ticket_id=t.id WHERE ut.user_id=?";
+            String sql = "SELECT * FROM user_tickets ut JOIN tickets t ON ut.ticket_id=t.id WHERE ut.user_id=? AND is_open=true";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
@@ -220,6 +219,16 @@ public class Tickets {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updateDescription(){
+        
+    }
+    
+    public void updateDueDate(){
+        
+    }
+    
+    
     
     //REDIRECTS
     public String createTicket(String redirect){

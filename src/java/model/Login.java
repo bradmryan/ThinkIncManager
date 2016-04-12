@@ -151,7 +151,6 @@ public class Login implements Serializable {
                 currentUser.setTickets(Tickets.getTicketsForUserFromDB(currentUser.getId()));
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                return "Fail";
             }
             
             return "Account";

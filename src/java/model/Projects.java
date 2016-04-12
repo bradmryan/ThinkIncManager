@@ -65,7 +65,7 @@ public class Projects implements Serializable {
         try (Connection conn = Utils.getConnection()) {
             projects = new ArrayList<>();
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM projects");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM projects WHERE isActive=true");
             while (rs.next()) {
                 Project p = new Project(
                         rs.getInt("id"),
@@ -108,7 +108,7 @@ public class Projects implements Serializable {
     
     public static List<Project> getProjectsForUserFromDB(int id){
         try (Connection conn = Utils.getConnection()) {
-            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=up.project_id WHERE up.user_id=?";
+            String sql = "SELECT * FROM projects p JOIN user_projects up ON p.id=up.project_id WHERE up.user_id=? AND isActive=true";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
