@@ -160,6 +160,9 @@ public class Projects implements Serializable {
             ps2.setBoolean(3, true);
             ps2.executeUpdate();
             
+            currentProject.setId(newID);
+            currentProject.getUsers().add(login.getCurrentUser());
+            
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }

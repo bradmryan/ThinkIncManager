@@ -82,7 +82,7 @@ public class Login implements Serializable {
         this.pass = pass;
     }
 
-    public  User getCurrentUser() {
+    public User getCurrentUser() {
         return currentUser;
     }
 
