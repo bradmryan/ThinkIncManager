@@ -27,6 +27,7 @@ public class Users implements Serializable{
     private static List<User> users;
 
     public Users() {
+       getUsersFromDB();
     }
     
     public List<User> getUsers() {

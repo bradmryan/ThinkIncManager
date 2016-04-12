@@ -8,7 +8,9 @@ package model;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -124,19 +126,36 @@ public class Login implements Serializable {
             try {
                 Connection conn = Utils.getConnection();
                 String sql = "INSERT INTO users (email, firstName, lastName, phoneNumber, password) VALUES (?, ?, ?, ?, ?)";
-                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, user);
                 ps.setString(2, firstName);
                 ps.setString(3, lastName);
                 ps.setString(4, phoneNumber);
                 ps.setString(5, passhash);
                 ps.executeUpdate();
+                
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                int newID = rs.getInt(1);
+                
+                System.out.println(newID);
+                
+                currentUser = new User();
+                
+                currentUser.setId(newID);
+                currentUser.setEmail(user);
+                currentUser.setFirstName(firstName);
+                currentUser.setLastName(lastName);
+                currentUser.setPhoneNumber(phoneNumber);
+                currentUser.setProjects(Projects.getProjectsForUserFromDB(currentUser.getId()));
+                currentUser.setTickets(Tickets.getTicketsForUserFromDB(currentUser.getId()));
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                return "fail";
+                return "Fail";
             }
+            
             return "Account";
         }
-        return "CreateAccount";
+        return "Login";
     }
 }
