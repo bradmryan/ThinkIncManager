@@ -13,30 +13,30 @@
                     <h1 style="text-align:center">Project Creation</h1>
                 </b:navBar>
                 <b:row style="margin-top: 15%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Project Name:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText value="#{projects.currentProject.projectName}" />
+                    <b:column tiny-screen="6" medium-screen="4" large-screen="4">
+                        <b:inputText value="#{projects.currentProject.projectName}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Description: " />
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7" >
-                        <h:inputText value="#{projects.currentProject.description}" />
+                    <b:column tiny-screen="6" medium-screen="4" large-screen="4" >
+                        <b:inputText value="#{projects.currentProject.description}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Start Date:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
+                    <b:column tiny-screen="6" medium-screen="4" large-screen="4">
                         <b:datepicker value="#{projects.currentProject.startDate}" />
                     </b:column>
                 </b:row>
-                <b:row style="margin-top:5% !important">
+                <b:row style="margin-top:3% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
                         <b:commandButton  value="Back to Account" action="Account" class="center-block" look="danger" />
                     </b:column>
