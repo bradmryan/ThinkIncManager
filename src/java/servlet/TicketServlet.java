@@ -115,22 +115,30 @@ public class TicketServlet extends HttpServlet {
         // parse json array
         // create ticket instance as tickets.setCurrentTicket() = new Ticket();
         // do createTicket method
-        String description = request.getParameter("description");
-        String start_date = request.getParameter("start_date");
-        String due_date = request.getParameter("due_date");
-        String priority = request.getParameter("priority");
-        String level = request.getParameter("level");
+       JsonObject json = Json.createReader(request.getInputStream()).readObject();
+        String desc = json.getString("description");
+        String priority = json.getString("priority");
+        int level = json.getInt("level");
         
-        DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
-        int lv = Integer.parseInt(level);
+//        Date d = new Date(json.getString("due_date"));
+//        String description = request.getParameter("description");
+//        String start_date = request.getParameter("start_date");
+//        String due_date = request.getParameter("due_date");
+//        String priority = request.getParameter("priority");
+//        String level = request.getParameter("level");
+        
+        DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);       
+//        int lv = Integer.parseInt(level);
         
         Ticket pt = new Ticket();
-        pt.setDescription(description);
+        pt.setDescription(desc);
         pt.setPriority(priority);
-        pt.setLevel(lv);
+        pt.setLevel(level);
         try {
-            pt.setStartDate(format.parse(start_date));
-            pt.setDueDate(format.parse(due_date));
+//            pt.setStartDate(format.parse(start_date));
+//            pt.setDueDate(format.parse(due_date));
+            pt.setDueDate(format.parse(json.getString("due_date")));
+            pt.setStartDate(format.parse(json.getString("start_date")));
         } catch (ParseException ex) {
             Logger.getLogger(TicketServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
