@@ -213,6 +213,9 @@ public class Tickets {
             ps2.setInt(2, newID);
             ps2.executeUpdate();
             
+            login.currentUser.getTickets().add(currentTicket);
+            projects.getCurrentProject().getTickets().add(currentTicket);
+            
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
