@@ -5,12 +5,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Think Inc</title>
     </h:head>
     <h:body>
         <h:form>
             <b:container>
-                <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
+                 <b:navBar fixed="top" class="text-center">
+                    <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
+                </b:navBar>
                 <b:row style="margin-top: 5%">  
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">
@@ -41,17 +43,20 @@
                 
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:commandButton value="Create New Ticket" action="CreateTicket" class="center-block" />
+                        <b:commandButton value="Create New Ticket" action="CreateTicket" class="center-block" look="danger"/>
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <h:commandButton value="Back to Account" action="Account"  />
+                        <b:commandButton value="Back to Account" action="Account" look="danger" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <h:commandButton value="Log Out" action="#{login.doLogout()}"  />
+                        <b:commandButton value="Log Out" action="#{login.doLogout()}"  look="danger"/>
                     </b:column>
                 </b:row>
             </b:container>
         </h:form>
+        <b:navBar fixed="bottom" class="text-center">
+            <h4 style="text-align:center">@2016 Think Inc.</h4>
+        </b:navBar>
     </h:body>
 </html>
 
