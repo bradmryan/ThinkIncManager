@@ -4,43 +4,55 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Think Inc Manager</title>
     </h:head>
     <h:body>
-        <h1 style="text-align:center">Hello from Think Inc.</h1>
+         <b:navBar fixed="top" class="text-center">
+          <h1 style="text-align:center">Hello from Think Inc.</h1>
+        </b:navBar>
         <h:form>
             <b:container>
-                <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                <b:row style="margin-top:15%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Email:" /> 
                     </b:column>
-                    <b:column tiny-screen="5" medium-screen="5" large-screen="5">
-                        <h:inputText a:placeholder="Enter Email" value="#{login.user}" />                   
+                    <b:column tiny-screen="4" medium-screen="4" large-screen="4">
+                        <b:inputText a:placeholder="Enter Email" value="#{login.user}">
+                            <f:facet name="prepend">
+                                <b:icon name="user"/>
+                            </f:facet>
+                        </b:inputText>                
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Password:" /> 
                     </b:column>
-                    <b:column tiny-screen="5" medium-screen="5" large-screen="5" >
-                        <h:inputSecret a:placeholder="********" value="#{login.pass}"/>                   
+                    <b:column tiny-screen="4" medium-screen="4" large-screen="4" >
+                        <b:inputSecret a:placeholder="********" value="#{login.pass}">
+                            <f:facet name="prepend">
+                                <b:iconAwesome name="key"/>
+                            </f:facet>
+                        </b:inputSecret>  
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
                     <b:column  tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" />
+                        <b:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" look="danger"/>
                     </b:column>
                     <b:column  tiny-screen="2" medium-screen="2" large-screen="2" offset="3" style="padding-right: 0 !important; margin-left: 0 !important">
-                        <h:commandButton  value="Sign Up" action="CreateAccount" class="center-block" />
+                        <b:commandButton  value="Sign Up" action="CreateAccount" class="center-block" look="danger"/>
                     </b:column>
                 </b:row>
             </b:container>
-        </h:form>
+        </h:form>   
+        <b:image value="Possible Logo.png" name="Logo" height="250px" class="center-block" style="margin-top: 5%"/>
     </h:body>
     <b:navBar fixed="bottom" class="text-center">
-        <h:outputText value="@2016 ThinkInc"  />
+        <h4 style="text-align:center">Hello from Think Inc.</h4>
     </b:navBar>
 </html>
 
