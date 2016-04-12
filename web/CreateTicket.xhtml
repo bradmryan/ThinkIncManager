@@ -4,63 +4,68 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Think Inc</title>
     </h:head>
     <h:body>
         <h:form>
             <b:container>
-                <h1 style="text-align:center">Ticket Creation</h1>
-                <b:row style="margin-top: 2%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                <b:navBar fixed="top" class="text-center">
+                    <h1 style="text-align:center">Ticket Creation</h1>
+                </b:navBar>
+                <b:row style="margin-top: 15%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Ticket Description:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText value="#{tickets.currentTicket.description}" />
+                    <b:column tiny-screen="4" medium-screen="4" large-screen="4">
+                        <b:inputText value="#{tickets.currentTicket.description}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Start Date: " />
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7" >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3" >
                         <b:datepicker value="#{tickets.currentTicket.startDate}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Due Date:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
                         <b:datepicker value="#{tickets.currentTicket.dueDate}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 2%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Priority:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText value="#{tickets.currentTicket.priority}" />
+                    <b:column tiny-screen="4" medium-screen="4" large-screen="4">
+                        <b:inputText value="#{tickets.currentTicket.priority}" />
                     </b:column>
                 </b:row>
                 <b:row style="margin-top: 2%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
                         <h:outputText value="Level:"/>
                     </b:column >
-                    <b:column tiny-screen="6" medium-screen="7" large-screen="7">
-                        <h:inputText value="#{tickets.currentTicket.level}" />
+                    <b:column tiny-screen="4" medium-screen="4" large-screen="4">
+                        <b:inputText value="#{tickets.currentTicket.level}" />
                     </b:column>
                 </b:row>
-                
+
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:commandButton   class="center-block" action="Projects" value="Back to Projects" />
+                        <b:commandButton   class="center-block" action="Projects" value="Back to Projects" look="danger" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <h:commandButton  value="Create Ticket" action="#{tickets.createTicket('Project')}" class="center-block" />
+                        <b:commandButton  value="Create Ticket" action="#{tickets.createTicket('Project')}" class="center-block" look="danger" />
                     </b:column>
                 </b:row>
             </b:container>
         </h:form>
+        <b:navBar fixed="bottom" class="text-center">
+            <h4 style="text-align:center">@2016 Think Inc.</h4>
+        </b:navBar>
     </h:body>
 </html>
 

@@ -1,16 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:b="http://bootsfaces.net/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Think Inc</title>
     </h:head>
     <h:body>
         <h:form>
             <b:container>
-                <h1 style="text-align:center">Project Creation</h1>
-                <b:row style="margin-top: 2%">
+                <b:navBar fixed="top" class="text-center">
+                    <h1 style="text-align:center">Project Creation</h1>
+                </b:navBar>
+                <b:row style="margin-top: 15%">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
                         <h:outputText value="Project Name:"/>
                     </b:column >
@@ -36,14 +38,17 @@
                 </b:row>
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <h:commandButton  value="Back to Account" action="Account" class="center-block" />
+                        <b:commandButton  value="Back to Account" action="Account" class="center-block" look="danger" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <h:commandButton  value="Create Project" action="#{projects.createProject('Project')}" class="center-block" />
+                        <b:commandButton  value="Create Project" action="#{projects.createProject('Project')}" class="center-block" look="danger" />
                     </b:column>
                 </b:row>
             </b:container>
         </h:form>
+        <b:navBar fixed="bottom" class="text-center">
+            <h4 style="text-align:center">@2016 Think Inc.</h4>
+        </b:navBar>
     </h:body>
 </html>
 

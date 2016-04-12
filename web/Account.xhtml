@@ -16,46 +16,51 @@ and open the template in the editor.
     <h:body>
         <h:form>
             <b:container>
-                <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
-                <b:row style="margin-top: 5%">  
-                  <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                   <ul style="list-style-type: none;">
-                       <li>ID: #{login.currentUser.id}</li>
-                       <li>Username: #{login.currentUser.email}</li>
-                       <li>First Name: #{login.currentUser.firstName}</li>
-                    <li>Last Name: #{login.currentUser.lastName}</li>
-                    <li>Phone Number: #{login.currentUser.phoneNumber}</li>
-                    <li><b:button look="button" value="Edit" class="center-block" style="margin-top:1% !important; float: left !important;"/></li>
-                  </ul>
-                  </b:column>
-                  <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                   <ul style="list-style-type: none;">
-                    <li style="font-weight: bold;border: 1px solid black">Projects I belong to:</li>
-                    <ui:repeat var="p" value="#{login.currentUser.projects}">
-                        <li style="border: 1px solid black"><h:commandLink action="#{projects.goToProject(p.id)}">#{p.projectName}</h:commandLink></li>
-                    </ui:repeat>
-                   </ul>
-                  </b:column>
+                <b:navBar fixed="top" class="text-center">
+                    <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
+                </b:navBar>
+                <b:row style="margin-top: 10%">  
+                    <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
+                        <ul style="list-style-type: none;">
+                            <li>ID: #{login.currentUser.id}</li>
+                            <li>Username: #{login.currentUser.email}</li>
+                            <li>First Name: #{login.currentUser.firstName}</li>
+                            <li>Last Name: #{login.currentUser.lastName}</li>
+                            <li>Phone Number: #{login.currentUser.phoneNumber}</li>
+                            <li><b:commandButton look="danger" value="Edit" class="center-block" style="margin-top:1% !important; float: left !important;"/></li>
+                        </ul>
+                    </b:column>
+                    <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
+                        <ul style="list-style-type: none;">
+                            <li style="font-weight: bold;border: 1px solid black">Projects I belong to:</li>
+                            <ui:repeat var="p" value="#{login.currentUser.projects}">
+                                <li style="border: 1px solid black"><h:commandLink action="#{projects.goToProject(p.id)}">#{p.projectName}</h:commandLink></li>
+                            </ui:repeat>
+                        </ul>
+                    </b:column>
                 </b:row>  
                 <b:row>
                     <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                      <ul style="list-style-type: none; width: 100% !important; margin-top: 5%">
-                        <li style="font-weight: bold;border: 1px solid black">Tickets assigned to me:</li>
-                        <ui:repeat var="t" value="#{login.currentUser.tickets}">
-                            <li style="border: 1px solid black"><h:commandLink action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
-                        </ui:repeat>
-                      </ul>
+                        <ul style="list-style-type: none; width: 100% !important; margin-top: 5%">
+                            <li style="font-weight: bold;border: 1px solid black">Tickets assigned to me:</li>
+                            <ui:repeat var="t" value="#{login.currentUser.tickets}">
+                                <li style="border: 1px solid black"><h:commandLink action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
+                            </ui:repeat>
+                        </ul>
                     </b:column>    
                 </b:row>
-                    <b:row style="margin-top:5% !important">
-                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                            <h:commandButton  value="Create Project" action="CreateProject" class="center-block" />
-                        </b:column>
-                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                            <h:commandButton  value="Log Out" action="#{login.doLogout()}" class="center-block" />
-                        </b:column>
-                    </b:row>
+                <b:row style="margin-top:5% !important">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <b:commandButton  value="Create Project" action="CreateProject" class="center-block" look="danger" />
+                    </b:column>
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
+                        <b:commandButton  value="Log Out" action="#{login.doLogout()}" class="center-block" look="danger"/>
+                    </b:column>
+                </b:row>
             </b:container>
         </h:form>
+        <b:navBar fixed="bottom" class="text-center">
+            <h4 style="text-align:center">@2016 Think Inc.</h4>
+        </b:navBar>
     </h:body>
 </html>
