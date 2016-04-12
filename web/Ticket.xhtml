@@ -14,9 +14,11 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-        <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
         <b:container>
-            <b:row style="margin-top: 5%">                
+            <b:navBar fixed="top" class="text-center">
+                     <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
+            </b:navBar>
+            <b:row style="margin-top: 20%">                
                 <b:column tiny-screen="12" medium-screen="12" large-screen="12">
                     <ul style="list-style-type: none; border: 2px solid black;">
                         <h4 style="margin-top: 2%">Ticket Description:</h4>
