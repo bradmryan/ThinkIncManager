@@ -13,6 +13,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <h:form>
         <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
         <b:container>
             <b:row style="margin-top: 5%">                
@@ -26,11 +27,11 @@ and open the template in the editor.
             </b:row>
             <b:row>
                 <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                    <h:commandButton  value="Back to Account" action="Account" class="center-block"  />
-                     <h:commandButton  value="Back to Project" action="Project" class="center-block" />
+                    <b:commandButton  value="Back to Account" action="Account" class="center-block"  look="danger" style="margin-top: 2%"/>
+                     <b:commandButton  value="Back to Project" action="Project" class="center-block" look="danger" style="margin-top: 2%"/>
                 </b:column>
             </b:row>
         </b:container>
-        
+         </h:form>
     </h:body>
 </html>
