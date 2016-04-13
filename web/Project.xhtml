@@ -11,7 +11,7 @@
         <h:form>
             <b:container>
                  <b:navBar fixed="top" class="text-center">
-                    <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
+                     <h1 style="text-align:center">#{projects.currentProject.projectName}</h1>
                 </b:navBar>
                 <b:row style="margin-top: 12%">  
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
@@ -28,7 +28,7 @@
                    <ul style="list-style-type: none;">
                     <li style="font-weight: bold;border: 1px solid black">Users on this project: </li>
                     <ui:repeat var="u" value="#{projects.currentProject.users}">
-                        <li style="border: 1px solid black"><h:commandLink action="#{u.id}">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
+                        <li style="border: 1px solid black"><h:commandLink value="mailto:#{u.email}">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
                     </ui:repeat>
                    </ul>
                   </b:column>
@@ -46,11 +46,14 @@
                         <b:commandButton value="Create New Ticket" action="CreateTicket" class="center-block" look="danger"/>
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <b:commandButton value="Back to Account" action="Account" look="danger" />
+                        <b:commandButton value="Back to Account" action="#{navigation.goToAccount()}" look="danger" />
                     </b:column>
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
                         <b:commandButton value="Log Out" action="#{login.doLogout()}"  look="danger"/>
                     </b:column>
+                </b:row>
+                <b:row style="margin-top:5% !important">
+                    <b:commandButton value="DELETE THIS PROJECT" action="#{projects.destroyRedirect()}"  look="danger"/>
                 </b:row>
             </b:container>
         </h:form>

@@ -27,7 +27,17 @@ and open the template in the editor.
                             <li>First Name: #{login.currentUser.firstName}</li>
                             <li>Last Name: #{login.currentUser.lastName}</li>
                             <li>Phone Number: #{login.currentUser.phoneNumber}</li>
-                            <li><b:commandButton look="danger" value="Edit" class="center-block" style="margin-top:1% !important; float: left !important;"/></li>
+                            <li>#{login.isLoggedIn}</li>
+                            <li>
+                                <b:row style="margin-top:5% !important">
+                                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="0" style="padding-right: 0 !important">
+                                        <b:commandButton look="danger" value="Edit" class="center-block" style="margin-top:1% !important; float: left !important;"/>
+                                    </b:column>
+                                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="1" style="padding-right: 0 !important">
+                                        <b:commandButton look="danger" value="DELETE USER" action="#{users.destroyRedirect()}" class="center-block" style="margin-top:1% !important; float: left !important;"/>
+                                    </b:column>
+                                </b:row>
+                            </li>
                         </ul>
                     </b:column>
                     <b:column tiny-screen="6" medium-screen="6" large-screen="6">  

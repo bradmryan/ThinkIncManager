@@ -6,20 +6,18 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.Locale;
-import java.util.Map;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.ManagedProperty;
+
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonBuilderFactory;
+
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
@@ -27,7 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Login;
+
 import model.Projects;
 import model.Ticket;
 import model.Tickets;

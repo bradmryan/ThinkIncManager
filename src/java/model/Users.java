@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import utility.Utils;
 /**
@@ -26,6 +27,13 @@ import utility.Utils;
 public class Users implements Serializable{
     private static List<User> users;
 
+    @ManagedProperty("#{login}")
+    private Login login;
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+    
     public Users() {
        getUsersFromDB();
     }
@@ -138,5 +146,24 @@ public class Users implements Serializable{
             users = new ArrayList<>();
         }
         return users;
+    }
+    
+    public void destroy(){
+        try (Connection conn = Utils.getConnection()){
+            String sql = "DELETE FROM users WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, login.currentUser.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    //REDIRECTS
+    public String destroyRedirect(){
+        destroy();
+        login.doLogout();
+        return "Login";
     }
 }

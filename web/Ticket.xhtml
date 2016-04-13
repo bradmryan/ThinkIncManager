@@ -7,7 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Think Inc Manager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -24,13 +25,22 @@ and open the template in the editor.
                         <h4 style="margin-top: 2%">Ticket Description:</h4>
                         <li>#{tickets.currentTicket.description}</li>
                         <li style="margin-bottom: 2%">Project Name: #{projects.currentProject.projectName}</li>
+                        <li style="margin-bottom: 2%">Ticket Is Open: #{tickets.currentTicket.open}</li>
+                        <b:commandButton  value="RESOLVE TICKET" action="#{tickets.destroyRedirect()}" class="center-block" look="danger" style="margin-top: 2%"/>
                     </ul>
                 </b:column>
             </b:row>
+            <ul style="list-style-type: none;">
+                    <li style="font-weight: bold;border: 1px solid black">Users on this Ticket: </li>
+                    <ui:repeat var="u" value="#{ticket.currentTicket.users}">
+                        <li style="border: 1px solid black"><h:commandLink action="#{u.email}">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
+                    </ui:repeat>
+                   </ul>
             <b:row>
                 <b:column tiny-screen="12" medium-screen="12" large-screen="12">
                     <b:commandButton  value="Back to Account" action="Account" class="center-block"  look="danger" style="margin-top: 2%"/>
-                     <b:commandButton  value="Back to Project" action="Project" class="center-block" look="danger" style="margin-top: 2%"/>
+                    <b:commandButton  value="Back to Project" action="Project" class="center-block" look="danger" style="margin-top: 2%"/>
+                    <b:commandButton  value="DELETE TICKET" action="#{tickets.destroyRedirect()}" class="center-block" look="danger" style="margin-top: 2%"/>
                 </b:column>
             </b:row>
         </b:container>

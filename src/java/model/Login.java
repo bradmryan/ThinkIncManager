@@ -34,6 +34,10 @@ public class Login implements Serializable {
     private Boolean isLoggedIn;
     User currentUser;
 
+    public Login() {
+        isLoggedIn = false;
+    }
+    
     public String getUser() {
         return user;
     }
@@ -115,8 +119,7 @@ public class Login implements Serializable {
     }
     
     public String doLogout(){
-        currentUser = null;
-        isLoggedIn = false;
+        nullify();
         return "Login";
     }
     
@@ -149,6 +152,7 @@ public class Login implements Serializable {
                 currentUser.setPhoneNumber(phoneNumber);
                 currentUser.setProjects(Projects.getProjectsForUserFromDB(currentUser.getId()));
                 currentUser.setTickets(Tickets.getTicketsForUserFromDB(currentUser.getId()));
+                isLoggedIn = true;
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -156,5 +160,16 @@ public class Login implements Serializable {
             return "Account";
         }
         return "Login";
+    }
+    
+    public void nullify(){
+    user = null;
+    firstName = null;
+    lastName = null;
+    phoneNumber = null;
+    pass = null;
+    pass2 = null;
+    isLoggedIn = false;
+    currentUser= null;
     }
 }

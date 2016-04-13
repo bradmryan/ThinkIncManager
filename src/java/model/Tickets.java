@@ -212,9 +212,29 @@ public class Tickets {
             ps2.setInt(2, newID);
             ps2.executeUpdate();
             
-            login.currentUser.getTickets().add(currentTicket);
-            projects.getCurrentProject().getTickets().add(currentTicket);
-            
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void destroy(){
+        try (Connection conn = Utils.getConnection()){
+            String sql = "DELETE FROM tickets WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, currentTicket.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void resolve(){
+        try (Connection conn = Utils.getConnection()){
+            String sql = "UPDATE tickets SET is_open=false WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, currentTicket.getId());
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -233,6 +253,8 @@ public class Tickets {
     //REDIRECTS
     public String createTicket(String redirect){
         createTicket();
+        login.currentUser.setTickets(getTicketsForUserFromDB(login.currentUser.getId()));
+        projects.getCurrentProject().setTickets(getTicketsForProjectFromDB(currentTicket.getProjectId()));
         return redirect;
     }
     
@@ -241,6 +263,18 @@ public class Tickets {
         System.out.println(currentTicket.getId());
         currentTicket.setUsers(Users.getUsersForTicketFromDB(id));
         projects.goToProject(currentTicket.getProjectId());
+        return "Ticket";
+    }
+    
+    public String destroyRedirect(){
+        destroy();
+        login.currentUser.setTickets(getTicketsForUserFromDB(login.currentUser.getId()));
+        projects.getCurrentProject().setTickets(getTicketsForProjectFromDB(currentTicket.getProjectId()));
+        return "Project";
+    }
+    
+    public String resolveReload(){
+        resolve();
         return "Ticket";
     }
 }

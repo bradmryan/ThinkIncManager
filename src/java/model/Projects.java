@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import static model.Tickets.getTicketsForUserFromDB;
 import utility.Utils;
 
 /**
@@ -125,6 +126,7 @@ public class Projects implements Serializable {
                 );
                 projects.add(p);
             }
+            System.out.println("GOT PROJECTS FOR USER!");
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
             projects = new ArrayList<>();
@@ -161,11 +163,24 @@ public class Projects implements Serializable {
             ps2.executeUpdate();
             
             currentProject.setId(newID);
+            currentProject.setUsers(new ArrayList<User>());
             currentProject.getUsers().add(login.getCurrentUser());
             
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void destroy(){
+        try (Connection conn = Utils.getConnection()){
+            String sql = "DELETE FROM projects WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, currentProject.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     
@@ -180,5 +195,12 @@ public class Projects implements Serializable {
         currentProject.setUsers(Users.getUsersForProjectFromDB(id));
         currentProject.setTickets(Tickets.getTicketsForProjectFromDB(id));
         return "Project";
+    }
+    
+    public String destroyRedirect(){
+        destroy();
+        login.currentUser.setProjects(getProjectsForUserFromDB(login.currentUser.getId()));
+        login.currentUser.setTickets(getTicketsForUserFromDB(login.currentUser.getId()));
+        return "Account";
     }
 }
