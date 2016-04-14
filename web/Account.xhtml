@@ -19,9 +19,9 @@ and open the template in the editor.
                 <b:navBar fixed="top" class="text-center">
                     <h1 style="text-align:center">#{login.currentUser.firstNameLastName()}</h1>
                 </b:navBar>
-                <b:row style="margin-top: 10%">  
+                <b:row style="margin-top: 10%;  padding: 2%">  
                     <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                        <ul style="list-style-type: none;">
+                        <ul style="list-style-type: none; background-color: #4E5D6C; padding: 2%">
                             <li>ID: #{login.currentUser.id}</li>
                             <li>Username: #{login.currentUser.email}</li>
                             <li>First Name: #{login.currentUser.firstName}</li>
@@ -41,20 +41,20 @@ and open the template in the editor.
                         </ul>
                     </b:column>
                     <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                        <ul style="list-style-type: none;">
-                            <li style="font-weight: bold;border: 1px solid black">Projects I belong to:</li>
+                        <ul style="list-style-type: none; border: 1px solid #19334d; background-color: #4E5D6C; padding: 2%">
+                            <li style="font-weight: bold; padding-bottom: 1%">Projects I belong to:</li>
                             <ui:repeat var="p" value="#{login.currentUser.projects}">
-                                <li style="border: 1px solid black"><h:commandLink action="#{projects.goToProject(p.id)}">#{p.projectName}</h:commandLink></li>
+                                <li><h:commandLink style="color: lightblue" action="#{projects.goToProject(p.id)}">#{p.projectName}</h:commandLink></li>
                             </ui:repeat>
                         </ul>
                     </b:column>
                 </b:row>  
                 <b:row>
                     <b:column tiny-screen="12" medium-screen="12" large-screen="12">
-                        <ul style="list-style-type: none; width: 100% !important; margin-top: 5%">
-                            <li style="font-weight: bold;border: 1px solid black">Tickets assigned to me:</li>
+                        <ul style="list-style-type: none; width: 100% !important; margin-top: 5%; border: 1px solid #19334d; background-color: #4E5D6C; padding: 2%">
+                            <li style="font-weight: bold; padding-bottom: 1%">Tickets assigned to me:</li>
                             <ui:repeat var="t" value="#{login.currentUser.tickets}">
-                                <li style="border: 1px solid black"><h:commandLink action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
+                                <li><h:commandLink style="color: lightblue" action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
                             </ui:repeat>
                         </ul>
                     </b:column>    
