@@ -171,6 +171,34 @@ public class Projects implements Serializable {
         }
     }
     
+    public void update(){
+        try (Connection conn = Utils.getConnection()){
+            //UPDATE PROJECTS TABLE
+            String sql = "UPDATE projects SET name=?, description=?, startDate=?, endDate=?, isActive=? WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, currentProject.getProjectName());
+            ps.setString(2, currentProject.getDescription());
+            ps.setDate(3, new java.sql.Date(currentProject.getStartDate().getTime()));
+            ps.setDate(4, null);
+            ps.setBoolean(5, currentProject.isActive());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void endProject(){
+        try (Connection conn = Utils.getConnection()){
+            //UPDATE PROJECTS TABLE
+            String sql = "UPDATE projects SET isActive=? WHERE id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(5, false);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void destroy(){
         try (Connection conn = Utils.getConnection()){
             String sql = "DELETE FROM projects WHERE id=?";
@@ -202,5 +230,17 @@ public class Projects implements Serializable {
         login.currentUser.setProjects(getProjectsForUserFromDB(login.currentUser.getId()));
         login.currentUser.setTickets(getTicketsForUserFromDB(login.currentUser.getId()));
         return "Account";
+    }
+    
+    public String updateRedirect() {
+        update();
+        login.getCurrentUser().setProjects(getProjectsForUserFromDB(login.getCurrentUser().getId()));
+        return "Project";
+    }
+    
+    public String endProjectRedirect(){
+        endProject();
+        login.getCurrentUser().setProjects(getProjectsForUserFromDB(login.getCurrentUser().getId()));
+        return "Project";
     }
 }

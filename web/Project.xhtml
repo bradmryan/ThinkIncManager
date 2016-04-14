@@ -22,13 +22,14 @@
                        <li>End Date: #{projects.currentProject.endDate}</li>
                        <li>Start Date: #{projects.currentProject.startDate}</li>
                        <li>Active: #{projects.currentProject.active}</li>
+                       <li><b:commandButton value="Edit Project" action="#{navigation.goToEditProject()}"  look="danger"/></li>
                   </ul>
                   </b:column>
                   <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
                    <ul style="list-style-type: none;">
                     <li style="font-weight: bold;border: 1px solid black">Users on this project: </li>
                     <ui:repeat var="u" value="#{projects.currentProject.users}">
-                        <li style="border: 1px solid black"><h:commandLink value="mailto:#{u.email}">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
+                        <li style="border: 1px solid black"><h:commandLink>#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
                     </ui:repeat>
                    </ul>
                   </b:column>
@@ -52,9 +53,7 @@
                         <b:commandButton value="Log Out" action="#{login.doLogout()}"  look="danger"/>
                     </b:column>
                 </b:row>
-                <b:row style="margin-top:5% !important">
-                    <b:commandButton value="DELETE THIS PROJECT" action="#{projects.destroyRedirect()}"  look="danger"/>
-                </b:row>
+                
             </b:container>
         </h:form>
         <b:navBar fixed="bottom" class="text-center">

@@ -56,4 +56,8 @@ public class Navigation {
         login.setPass2(login.getPass());
         return "EditAccount";
     }
+    
+    public String goToEditProject(){
+        return "EditProject";
+    }
 }
