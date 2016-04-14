@@ -13,15 +13,14 @@ and open the template in the editor.
     <h:head>
         <title>Think Inc Manager</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <b:navBar class="text-center">
+            <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
+        </b:navBar>
     </h:head>
     <h:body>
         <h:form>
             <b:container>
-                <b:navBar fixed="top" class="text-center">
-                    <h1 style="text-align:center">Ticket # #{tickets.currentTicket.id}</h1>
-                </b:navBar>
-
-                <b:row style="margin-top: 20%; border: 2px solid #19334d; background-color: #4E5D6C; padding: 2%" >
+                <b:row style="margin-top: 2%; border: 2px solid #19334d; background-color: #4E5D6C; padding: 2%" >
                     <b:column tiny-screen="6" medium-screen="6" large-screen="6">
                         <ul style="list-style-type: none;">
                             <h4 style="margin-top: 2%">Ticket Description:</h4>

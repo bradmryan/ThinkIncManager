@@ -5,45 +5,47 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
         <title>Think Inc</title>
+        <b:navBar class="text-center">
+            <h1 style="text-align:center">Project Creation</h1>
+        </b:navBar>
     </h:head>
-    <h:body>
+    <h:body>       
         <h:form>
             <b:container>
-                <b:navBar fixed="top" class="text-center">
-                    <h1 style="text-align:center">Project Creation</h1>
-                </b:navBar>
-                <b:row style="margin-top: 15%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
-                        <h:outputText value="Project Name:"/>
-                    </b:column >
-                    <b:column tiny-screen="6" medium-screen="4" large-screen="4">
-                        <b:inputText value="#{projects.currentProject.projectName}" />
-                    </b:column>
-                </b:row>
-                <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
-                        <h:outputText value="Description: " />
-                    </b:column >
-                    <b:column tiny-screen="6" medium-screen="4" large-screen="4" >
-                        <b:inputText value="#{projects.currentProject.description}" />
-                    </b:column>
-                </b:row>
-                <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
-                        <h:outputText value="Start Date:"/>
-                    </b:column >
-                    <b:column tiny-screen="6" medium-screen="4" large-screen="3">
-                        <b:datepicker value="#{projects.currentProject.startDate}" />
-                    </b:column>
-                </b:row>
-                <b:row style="margin-top:3% !important">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <b:commandButton  value="Back to Account" action="Account" class="center-block" look="danger" />
-                    </b:column>
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
-                        <b:commandButton  value="Create Project" action="#{projects.createProject('Project')}" class="center-block" look="danger" />
-                    </b:column>
-                </b:row>
+                <div style="border: 2px solid #19334d; background-color: #4E5D6C; padding: 2%; margin-top: 2%">
+                    <b:row >
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
+                            <h:outputText value="Project Name:"/>
+                        </b:column >
+                        <b:column tiny-screen="6" medium-screen="4" large-screen="4">
+                            <b:inputText value="#{projects.currentProject.projectName}" />
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top: 1%">
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
+                            <h:outputText value="Description: " />
+                        </b:column >
+                        <b:column tiny-screen="6" medium-screen="4" large-screen="4" >
+                            <b:inputText value="#{projects.currentProject.description}" />
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top: 1%">
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
+                            <h:outputText value="Start Date:"/>
+                        </b:column >
+                        <b:column tiny-screen="6" medium-screen="4" large-screen="3">
+                            <b:datepicker value="#{projects.currentProject.startDate}" />
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top:3% !important">
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                            <b:commandButton  value="Back to Account" action="Account" class="center-block" look="danger" />
+                        </b:column>
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important; margin-left: 7% !important">
+                            <b:commandButton  value="Create Project" action="#{projects.createProject('Project')}" class="center-block" look="danger" />
+                        </b:column>
+                    </b:row>
+                </div>
             </b:container>
         </h:form>
         <b:navBar fixed="bottom" class="text-center">
