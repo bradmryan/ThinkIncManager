@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Think Inc Manager</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+         <b:navBar fixed="top" class="text-center">
+          <h1 style="text-align:center">Account Creation</h1>
+        </b:navBar>
+        <h:form>
+            <b:container>
+                <b:row style="margin-top:12%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Email:"/>
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
+                        <b:inputText value="#{login.user}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="First Name: " />
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3" >
+                        <b:inputText value="#{login.firstName}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Last Name:"/>
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
+                        <b:inputText value="#{login.lastName}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <!--bootsfaces column medium offset is not working col-md-offset="3"-->
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Phone Number:"/>
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
+                        <b:inputText value="#{login.phoneNumber}" />
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Password" />
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
+                        <b:inputSecret value="#{login.pass}"/>
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                        <h:outputText value="Confirm Password: " />
+                    </b:column >
+                    <b:column tiny-screen="3" medium-screen="3" large-screen="3">
+                        <b:inputSecret value="#{login.pass2}"/>
+                    </b:column>
+                </b:row>
+                <b:row style="margin-top: 1%">
+                    <b:column tiny-screen="12" medium-screen="12" large-screen="12">
+                        <b:commandButton  class="center-block" action="#{login.doEditUser()}" value="Update User" look="danger"/>
+                    </b:column>
+                </b:row>
+            </b:container>
+        </h:form>
+        <b:navBar fixed="bottom" class="text-center">
+        <h4 style="text-align:center">@2016 Think Inc.</h4>
+        </b:navBar>
+    </h:body>
+</html>

@@ -162,14 +162,45 @@ public class Login implements Serializable {
         return "Login";
     }
     
+    public String doEditUser(){
+        if (pass.equals(pass2)) {
+            String passhash = Utils.hash(pass);
+            try {
+                Connection conn = Utils.getConnection();
+                String sql = "UPDATE users SET email=?, firstName=?, lastName=?, phoneNumber=?, password=? WHERE id=?";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, user);
+                ps.setString(2, firstName);
+                ps.setString(3, lastName);
+                ps.setString(4, phoneNumber);
+                ps.setString(5, passhash);
+                ps.setInt(6, currentUser.getId());
+                ps.executeUpdate();
+                
+                currentUser.setEmail(user);
+                currentUser.setFirstName(firstName);
+                currentUser.setLastName(lastName);
+                currentUser.setPhoneNumber(phoneNumber);
+                currentUser.setProjects(Projects.getProjectsForUserFromDB(currentUser.getId()));
+                currentUser.setTickets(Tickets.getTicketsForUserFromDB(currentUser.getId()));
+                isLoggedIn = true;
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            return "Account";
+        }
+        return "EditAccount";
+    }
+    
     public void nullify(){
-    user = null;
-    firstName = null;
-    lastName = null;
-    phoneNumber = null;
-    pass = null;
-    pass2 = null;
-    isLoggedIn = false;
-    currentUser= null;
+        user = null;
+        firstName = null;
+        lastName = null;
+        phoneNumber = null;
+        pass = null;
+        pass2 = null;
+        isLoggedIn = false;
+        currentUser= null;
     }
 }

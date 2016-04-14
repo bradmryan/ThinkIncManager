@@ -49,5 +49,11 @@ public class Navigation {
         return "CreateAccount";
     }
     
-    
+    public String goToEditUser(){
+        login.setFirstName(login.getCurrentUser().getFirstName());
+        login.setLastName(login.getCurrentUser().getLastName());
+        login.setPhoneNumber(login.getCurrentUser().getPhoneNumber());
+        login.setPass2(login.getPass());
+        return "EditAccount";
+    }
 }
