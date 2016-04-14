@@ -10,38 +10,40 @@
     <h:body>
         <h:form>
             <b:container>
-                 <b:navBar fixed="top" class="text-center">
-                     <h1 style="text-align:center">#{projects.currentProject.projectName}</h1>
+                <b:navBar fixed="top" class="text-center">
+                    <h1 style="text-align:center">#{projects.currentProject.projectName}</h1>
                 </b:navBar>
                 <b:row style="margin-top: 12%">  
-                  <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                   <ul style="list-style-type: none;">
-                       <li>ID: #{projects.currentProject.id}</li>
-                       <li>Name: #{projects.currentProject.projectName}</li>
-                       <li>Description: #{projects.currentProject.description}</li>
-                       <li>End Date: #{projects.currentProject.endDate}</li>
-                       <li>Start Date: #{projects.currentProject.startDate}</li>
-                       <li>Active: #{projects.currentProject.active}</li>
-                       <li><b:commandButton value="Edit Project" action="#{navigation.goToEditProject()}"  look="danger"/></li>
-                  </ul>
-                  </b:column>
-                  <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
-                   <ul style="list-style-type: none;">
-                    <li style="font-weight: bold;border: 1px solid black">Users on this project: </li>
-                    <ui:repeat var="u" value="#{projects.currentProject.users}">
-                        <li style="border: 1px solid black"><h:commandLink>#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
-                    </ui:repeat>
-                   </ul>
-                  </b:column>
+                    <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
+                        <ul style="list-style-type: none; border: 1px solid #19334d; background-color: #4E5D6C; padding: 2%">
+                            <li>ID: #{projects.currentProject.id}</li>
+                            <li>Name: #{projects.currentProject.projectName}</li>
+                            <li>Description: #{projects.currentProject.description}</li>
+                            <li>End Date: #{projects.currentProject.endDate}</li>
+                            <li>Start Date: #{projects.currentProject.startDate}</li>
+                            <li>Active: #{projects.currentProject.active}</li>
+                            <li style="padding-top: 1%"><b:commandButton value="Edit Project" action="#{navigation.goToEditProject()}"  look="danger"/></li>
+                        </ul>
+                    </b:column>
+                    <b:column tiny-screen="6" medium-screen="6" large-screen="6">  
+                        <ul style="list-style-type: none; border: 1px solid #19334d; background-color: #4E5D6C; padding: 2%">
+                            <li style="font-weight: bold; padding-bottom: 1%">Users on this project: </li>
+                            <ui:repeat var="u" value="#{projects.currentProject.users}">
+                                <li><h:commandLink style="color: lightblue">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
+                            </ui:repeat>
+                        </ul>
+                    </b:column>
                 </b:row>  
-                
-                <b:row>
-                    <li style="font-weight: bold;border: 1px solid black">Tickets for this Project: </li>
-                    <ui:repeat var="t" value="#{projects.currentProject.tickets}">
-                        <li style="border: 1px solid black"><h:commandLink action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
-                    </ui:repeat>
+
+                <b:row style="padding-top: 2%">
+                    <ul style="list-style-type: none; border: 1px solid #19334d; background-color: #4E5D6C; padding: 2%">
+                        <li  style="font-weight: bold; padding-bottom: 1%">Tickets for this Project: </li>                   
+                        <ui:repeat var="t" value="#{projects.currentProject.tickets}">
+                            <li><h:commandLink style="color: lightblue" action="#{tickets.goToTicket(t.id)}">#{t.description} #{t.dueDate} #{t.priority}</h:commandLink></li>
+                        </ui:repeat>
+                    </ul>
                 </b:row>
-                
+
                 <b:row style="margin-top:5% !important">
                     <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
                         <b:commandButton value="Create New Ticket" action="CreateTicket" class="center-block" look="danger"/>
@@ -53,7 +55,7 @@
                         <b:commandButton value="Log Out" action="#{login.doLogout()}"  look="danger"/>
                     </b:column>
                 </b:row>
-                
+
             </b:container>
         </h:form>
         <b:navBar fixed="bottom" class="text-center">
