@@ -185,7 +185,7 @@ public class Tickets {
         }
     }
     
-    private void createTicket(){
+    public void createTicket(){
         try (Connection conn = Utils.getConnection()){
             
             String sql = "INSERT INTO tickets (description, start_date, due_date, close_date, priority, level, project_id, is_open) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -237,6 +237,17 @@ public class Tickets {
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Projects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addUserToTicket(){
+        try(Connection conn = Utils.getConnection()){
+            String sql = "INSERT INTO user_tickets VALUES (?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, login.getCurrentUser().getId());
+            ps.setInt(2, currentTicket.getId());
+        } catch (SQLException ex) {
+            Logger.getLogger(Tickets.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

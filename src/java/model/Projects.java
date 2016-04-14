@@ -199,6 +199,18 @@ public class Projects implements Serializable {
         }
     }
     
+    public void addUserToTicket(){
+        try(Connection conn = Utils.getConnection()){
+            String sql = "INSERT INTO user_projects VALUES (?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, login.getCurrentUser().getId());
+            ps.setInt(2, currentProject.getId());
+            ps.setBoolean(3, false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Tickets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void destroy(){
         try (Connection conn = Utils.getConnection()){
             String sql = "DELETE FROM projects WHERE id=?";

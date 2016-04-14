@@ -144,7 +144,7 @@ public class TicketServlet extends HttpServlet {
         }
         
         tickets.setCurrentTicket(pt);
-        tickets.createTicket("");
+        tickets.createTicket();
     }
 
     /**
