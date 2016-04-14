@@ -99,8 +99,9 @@ public class Users implements Serializable{
     }
     
     public static List<User> getUsersForProjectFromDB(int id){
+        List<User> projusers = new ArrayList<>();
         try (Connection conn = Utils.getConnection()) {
-            users = new ArrayList<>();
+            
             String sql = "SELECT * FROM users u JOIN user_projects up ON u.id=up.user_id WHERE up.project_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -114,13 +115,12 @@ public class Users implements Serializable{
                         rs.getString("phoneNumber"),
                         rs.getString("password")
                 );
-                users.add(u);
+                projusers.add(u);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Users.class.getName()).log(Level.SEVERE, null, ex);
-            users = new ArrayList<>();
         }
-        return users;
+        return projusers;
     }
     
     public static List<User> getUsersForTicketFromDB(int id){
