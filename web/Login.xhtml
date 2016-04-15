@@ -8,6 +8,9 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Think Inc</title>
+        <b:navBar class="text-center">
+            <h1 style="text-align:center">Hello from Think Inc.</h1>
+        </b:navBar>
     </h:head>
     <h:body>
         <c:if test="#{login.isLoggedIn}">
@@ -15,45 +18,42 @@
         </c:if>
         <c:otherwise>
 
-        <h:form>
-            <b:container>
-                <b:navBar fixed="top" class="text-center">
-                  <h1 style="text-align:center">Hello from Think Inc.</h1>
-                </b:navBar>
-                <b:row style="margin-top:15%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
-                        <h:outputText value="Email:" /> 
-                    </b:column>
-                    <b:column tiny-screen="4" medium-screen="4" large-screen="4">
-                        <b:inputText a:placeholder="Enter Email" value="#{login.user}">
-                            <f:facet name="prepend">
-                                <b:icon name="user"/>
-                            </f:facet>
-                        </b:inputText>                
-                    </b:column>
-                </b:row>
-                <b:row style="margin-top: 1%">
-                    <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
-                        <h:outputText value="Password:" /> 
-                    </b:column>
-                    <b:column tiny-screen="4" medium-screen="4" large-screen="4" >
-                        <b:inputSecret a:placeholder="********" value="#{login.pass}">
-                            <f:facet name="prepend">
-                                <b:iconAwesome name="key"/>
-                            </f:facet>
-                        </b:inputSecret>  
-                    </b:column>
-                </b:row>
-                <b:row style="margin-top: 1%">
-                    <b:column  tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
-                        <b:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" look="danger"/>
-                    </b:column>
-                    <b:column  tiny-screen="2" medium-screen="2" large-screen="2" offset="3" style="padding-right: 0 !important; margin-left: 0 !important">
-                        <b:commandButton  value="Sign Up" action="#{navigation.goToSignUp()}" class="center-block" look="danger"/>
-                    </b:column>
-                </b:row>
-            </b:container>
-        </h:form>
+            <h:form>
+                <b:container>
+                    <b:row style="margin-top:6.5%">
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
+                            <h:outputText value="Email:" /> 
+                        </b:column>
+                        <b:column tiny-screen="4" medium-screen="4" large-screen="4">
+                            <b:inputText a:placeholder="Enter Email" value="#{login.user}">
+                                <f:facet name="prepend">
+                                    <b:icon name="user"/>
+                                </f:facet>
+                            </b:inputText>                
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top: 1%">
+                        <b:column tiny-screen="2" medium-screen="1" large-screen="1" offset="3" style="padding-right: 0 !important">
+                            <h:outputText value="Password:" /> 
+                        </b:column>
+                        <b:column tiny-screen="4" medium-screen="4" large-screen="4" >
+                            <b:inputSecret a:placeholder="********" value="#{login.pass}">
+                                <f:facet name="prepend">
+                                    <b:iconAwesome name="key"/>
+                                </f:facet>
+                            </b:inputSecret>  
+                        </b:column>
+                    </b:row>
+                    <b:row style="margin-top: 1%">
+                        <b:column  tiny-screen="2" medium-screen="1" large-screen="1" offset="4" style="padding-right: 0 !important">
+                            <b:commandButton  value="Sign In" action="#{login.doLogin()}" class="center-block" look="danger"/>
+                        </b:column>
+                        <b:column  tiny-screen="2" medium-screen="2" large-screen="2" offset="3" style="padding-right: 0 !important; margin-left: 0 !important">
+                            <b:commandButton  value="Sign Up" action="#{navigation.goToSignUp()}" class="center-block" look="danger"/>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </h:form>
         </c:otherwise>
         <b:image value="Logo.png" name="Logo" height="250px" class="center-block" style="margin-top: 5%"/>
     </h:body>
