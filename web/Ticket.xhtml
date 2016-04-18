@@ -42,7 +42,7 @@ and open the template in the editor.
                 <b:row style="margin-top: 4%; border: 2px solid #19334d; background-color: #4E5D6C">
                     <ul style="list-style-type: none; margin-top: 1%">
                         <li style="font-weight: bold;">Users on this Ticket: </li>
-                        <ui:repeat var="u" value="#{ticket.currentTicket.users}">
+                        <ui:repeat var="u" value="#{tickets.currentTicket.users}">
                             <li style="border: 1px solid black"><h:commandLink action="#{u.email}">#{u.firstNameLastName()} #{u.email}</h:commandLink></li>
                         </ui:repeat>
                     </ul>
