@@ -32,9 +32,9 @@ and open the template in the editor.
                     </b:column>
                     <b:column tiny-screen="4" medium-screen="4" large-screen="4" style="margin-top: 2%">
                         <b:selectOneMenu value="#{users.getUser(id)}" style="background-color: #0c1a27" >
-                            <ui:repeat var="u" value="#{users.users}" >
+                            <ui:repeat var="u" value="#{users.getUsers()}" >
                                 <f:selectItem itemLabel="#{u.email}" itemValue="#{u.id}"/>
-                            </ui:repeat>  
+                            </ui:repeat>
                         </b:selectOneMenu>
                         <b:commandButton value="Add User" action="#{u.email}" look="danger" />
                     </b:column>

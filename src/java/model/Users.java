@@ -39,6 +39,8 @@ public class Users implements Serializable{
     }
     
     public List<User> getUsers() {
+        
+        for (User u : users) System.out.println(u.firstNameLastName());
         return users;
     }
     
@@ -52,6 +54,7 @@ public class Users implements Serializable{
     
     public void getUsersFromDB(){
         try (Connection conn = Utils.getConnection()) {
+            System.out.println("TEST!");
             users = new ArrayList<>();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");
